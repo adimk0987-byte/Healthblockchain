@@ -1,0 +1,20 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "HealthChain API",
+    "version": "1.0.0",
+    "description": "Swagger-style API description for HealthChain backend."
+  },
+  "paths": {
+    "/auth/send-otp": {
+      "post": {
+        "summary": "Send OTP to phone",
+        "requestBody": { "content": { "application/json": { "schema": { "type": "object", "properties": { "phone": { "type": "string" }, "name": { "type": "string" } } } } } },
+        "responses": { "200": { "description": "OTP sent" } }
+      }
+    },
+    "/auth/verify-otp": { "post": { "summary": "Verify OTP and get JWT" } },
+    "/ai/diagnose": { "post": { "summary": "AI diagnosis endpoint (auth)" } },
+    "/blockchain/hash": { "post": { "summary": "Hash record payload" } }
+  }
+}

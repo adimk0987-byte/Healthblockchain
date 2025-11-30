@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="HealthChain ID - Blockchain-secured healthcare identity with AI-powered diagnosis and privacy-controlled medical records">
+  <meta name="keywords" content="healthcare, blockchain, cardano, medical records, AI diagnosis, NFC health card">
+  <div class="container header-content">
+    <div class="logo">
+      <div class="logo-icon">🏥</div>
+      <span id="appName">HealthChain ID</span>
+    </div>
+
+    <div class="header-actions">
+      <!-- Cardano Wallet Connection -->
+      <button id="connectWalletBtn" class="btn btn-primary hidden" style="font-size: 0.875rem; padding: 0.5rem 1rem;"
+        onclick="connectCardanoWallet()">
+        🔐 Connect Wallet
+      </button>
+
+      <!-- Language Switcher -->
+      <select id="languageSelect" class="form-select" style="width: auto; padding: 0.5rem 1rem;">
+        <option value="en">🇬🇧 English</option>
+        <option value="hi">🇮🇳 हिंदी</option>
+        <option value="kn">🇮🇳 ಕನ್ನಡ</option>
+        <option value="bn">🇮🇳 বাংলা</option>
+      </select>
+
+      <!-- Dark Mode Toggle -->
+      <button id="darkModeToggle" class="btn-icon" title="Toggle Dark Mode">
+        <span id="darkModeIcon">🌙</span>
+      </button>
+
+      <!-- Emergency Quick Access (only shown when logged in) -->
+      <button id="quickEmergency" class="btn-emergency hidden" style="padding: 0.5rem 1rem;">
+        🚨 <span id="emergencyBtnText">Emergency</span>
+      </button>
+    </div>
+  </div>
+  </header>
+
+  <!-- Wallet Status Indicator -->
+  <div id="walletStatus" class="hidden" style="max-width: 1200px; margin: 1rem auto; padding: 0 1.5rem;"></div>
+
+  <!-- Main Content -->
+  <main>
+
+    <!-- Page 1: Home / Landing -->
+    <section id="homePage" class="section active">
+      <div class="container">
+        <!-- Hero Section -->
+        <div class="flex flex-col flex-center" style="min-height: 80vh; text-align: center;">
+          <div class="animate-fadeIn">
+            <h1 id="heroTagline" style="max-width: 900px; margin: 0 auto 1rem;">
+              Your Health, Securely Connected Everywhere
+            </h1>
+            <p id="heroSubtagline"
+              style="font-size: 1.25rem; color: var(--dark-gray); max-width: 700px; margin: 0 auto 2rem;">
+              One card. Lifetime medical records. Blockchain-secured. AI-powered healthcare at your fingertips.
+            </p>
+
+            <!-- Hero Illustration Placeholder -->
+            <div class="card-glass" style="max-width: 600px; margin: 2rem auto; padding: 3rem;">
+              <div id="heroIllustration"
+                style="min-height: 300px; display: flex; align-items: center; justify-content: center; font-size: 5rem;">
+                📱💳🏥
+              </div>
+            </div>
+
+            <!-- CTA Buttons -->
+            <div class="flex gap-md flex-center" style="flex-wrap: wrap; margin-top: 2rem;">
+              <button id="btnScanNFC" class="btn btn-primary btn-lg">
+                📷 <span id="scanNFCText">Scan NFC / QR</span>
+              </button>
+              <button id="btnLoginPhone" class="btn btn-outline btn-lg">
+                📞 <span id="loginPhoneText">Login with Phone</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="grid grid-4 mt-lg" style="margin-top: 4rem;">
+          <div class="card card-glass animate-fadeIn">
+            <div class="card-icon" style="background: var(--gradient-primary); color: white;">🔗</div>
+            <h3 class="card-title" id="feature1Title">Blockchain Secure</h3>
+            <p class="card-description" id="feature1Desc">Your medical data encrypted on Cardano blockchain</p>
+          </div>
+
+          <div class="card card-glass animate-fadeIn" style="animation-delay: 0.1s;">
+            <div class="card-icon" style="background: var(--gradient-success); color: white;">🤖</div>
+            <h3 class="card-title" id="feature2Title">AI-Powered</h3>
+            <p class="card-description" id="feature2Desc">Instant disease detection and health recommendations</p>
+          </div>
+
+          <div class="card card-glass animate-fadeIn" style="animation-delay: 0.2s;">
+            <div class="card-icon" style="background: var(--primary-blue); color: white;">🔒</div>
+            <h3 class="card-title" id="feature3Title">Privacy First</h3>
+            <p class="card-description" id="feature3Desc">You control who sees your medical information</p>
+          </div>
+
+          <div class="card card-glass animate-fadeIn" style="animation-delay: 0.3s;">
+            <div class="card-icon" style="background: var(--severity-critical); color: white;">🚨</div>
+            <h3 class="card-title" id="feature4Title">Emergency Ready</h3>
+            <p class="card-description" id="feature4Desc">Life-saving info accessible even when unconscious</p>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <footer style="text-align: center; margin-top: 4rem; padding: 2rem 0; border-top: 2px solid var(--light-gray);">
+          <p id="missionStatement" style="font-size: 1rem; font-weight: 600; margin-bottom: 1rem;">
+            Mission: Making healthcare accessible, secure, and connected for everyone
+      </div>
+
+      <!-- Social Login Options -->
+      <div class="flex flex-col gap-sm">
+        <button class="btn btn-outline w-full"
+          style="border: 2px solid rgba(6, 182, 212, 0.3); justify-content: center; display: flex; align-items: center; gap: 0.75rem; padding: 0.875rem;">
+          <span style="font-size: 1.25rem;">🔐</span>
+          <span style="font-weight: 600;">Continue with Cardano Wallet</span>
+        </button>
+        <button class="btn btn-outline w-full"
+          style="border: 2px solid rgba(6, 182, 212, 0.3); justify-content: center; display: flex; align-items: center; gap: 0.75rem; padding: 0.875rem;">
+          <span style="font-size: 1.25rem;">🌐</span>
+          <span style="font-weight: 600;">Continue with Google</span>
+        </button>
+      </div>
+      </div>
+      </div>
+
+      <!-- Features Section -->
+      <div class="grid grid-3 gap-md mt-xl">
+        <div class="card text-center"
+          style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(124, 58, 237, 0.05) 100%); border: 1px solid rgba(139, 92, 246, 0.2);">
+          <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🔒</div>
+          <h4 style="margin: 0.5rem 0; color: #8b5cf6;">Secure</h4>
+          <p style="font-size: 0.875rem; color: var(--dark-gray); margin: 0;">End-to-end encrypted</p>
+        </div>
+        <div class="card text-center"
+          style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, rgba(5, 150, 105, 0.05) 100%); border: 1px solid rgba(16, 185, 129, 0.2);">
+          <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">⚡</div>
+          <h4 style="margin: 0.5rem 0; color: #10b981;">Fast</h4>
+          <p style="font-size: 0.875rem; color: var(--dark-gray); margin: 0;">Instant access</p>
+        </div>
+        <div class="card text-center"
+          style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.05) 0%, rgba(220, 38, 38, 0.05) 100%); border: 1px solid rgba(239, 68, 68, 0.2);">
+          <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🌍</div>
+          <h4 style="margin: 0.5rem 0; color: #ef4444;">Universal</h4>
+          <p style="font-size: 0.875rem; color: var(--dark-gray); margin: 0;">Works everywhere</p>
+        </div>
+      </div>
+      </div>
+
+      <!-- Right Side: Chat Box Placeholder -->
+      <div id="chatBoxContainer" style="position: sticky; top: 2rem;">
+        <div class="card"
+          style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%); border: 2px solid rgba(99, 102, 241, 0.2); box-shadow: 0 8px 32px rgba(99, 102, 241, 0.15); height: 600px; display: flex; flex-direction: column;">
+          <!-- Chat Header -->
+          <div
+            style="padding: 1.25rem; border-bottom: 2px solid rgba(99, 102, 241, 0.2); background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); color: white; border-radius: 12px 12px 0 0; margin: -1rem -1rem 0 -1rem;">
+            <div class="flex flex-between" style="align-items: center;">
+              <div class="flex" style="align-items: center; gap: 0.75rem;">
+                <div
+                  style="width: 40px; height: 40px; border-radius: 50%; background: white; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+                  🤖
+                </div>
+                <div>
+                  <h3 style="margin: 0; font-size: 1.125rem;">Health Assistant</h3>
+                  <p style="margin: 0; font-size: 0.75rem; opacity: 0.9;">Always here to help</p>
+                </div>
+              </div>
+              <button onclick="toggleChat()"
+                style="background: rgba(255,255,255,0.2); border: none; color: white; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 1.125rem;">
+                −
+              </button>
+            </div>
+          </div>
+
+          <!-- Chat Messages Area -->
+          <div id="chatMessages" style="flex: 1; padding: 1.25rem; overflow-y: auto; background: white;">
+            <!-- Welcome Message -->
+            <div style="margin-bottom: 1rem;">
+              <div
+                style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%); padding: 1rem; border-radius: 12px 12px 12px 4px; max-width: 85%;">
+                <p style="margin: 0; font-size: 0.9375rem; color: var(--dark-gray);">
+                  👋 Hi! I'm your Health Assistant. I can help you with:
+                </p>
+                <ul style="margin: 0.5rem 0 0 1.25rem; padding: 0; font-size: 0.875rem; color: var(--dark-gray);">
+                  <li>Scanning your health card</li>
+                  <li>Accessing medical records</li>
+                  <li>Booking appointments</li>
+                  <li>Emergency assistance</li>
+                </ul>
+              </div>
+              <p style="font-size: 0.75rem; color: var(--dark-gray); margin: 0.25rem 0 0 0.5rem; opacity: 0.7;">
+                Just now
+              </p>
+            </div>
+
+            <!-- Quick Actions -->
+            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem;">
+              <button class="btn btn-outline btn-sm"
+                style="font-size: 0.8125rem; padding: 0.5rem 0.875rem; border-radius: 20px;">
+                📱 How to scan?
+              </button>
+              <button class="btn btn-outline btn-sm"
+                style="font-size: 0.8125rem; padding: 0.5rem 0.875rem; border-radius: 20px;">
+                🆘 Need help?
+              </button>
+              <button class="btn btn-outline btn-sm"
+                style="font-size: 0.8125rem; padding: 0.5rem 0.875rem; border-radius: 20px;">
+                📞 Contact support
+              </button>
+            </div>
+
+            <!-- Placeholder for future messages -->
+            <div id="chatMessagesContainer"></div>
+          </div>
+
+          <!-- Chat Input Area -->
+          <div
+            style="padding: 1rem; border-top: 2px solid rgba(99, 102, 241, 0.2); background: rgba(99, 102, 241, 0.02);">
+            <div style="display: flex; gap: 0.5rem; align-items: center;">
+              <input type="text" id="chatInput" placeholder="Type your message..." class="form-input"
+                style="flex: 1; border: 2px solid rgba(99, 102, 241, 0.3); padding: 0.75rem; font-size: 0.9375rem; border-radius: 25px;"
+                disabled>
+              <button class="btn btn-primary"
+                style="background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); border: none; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.25rem;"
+                disabled>
+                📤
+              </button>
+            </div>
+            <p
+              style="font-size: 0.75rem; color: var(--dark-gray); margin: 0.5rem 0 0 0; text-align: center; opacity: 0.7;">
+              Chat functionality coming soon
+            </p>
+          </div>
+        </div>
+      </div>
+
+      </div>
+      </div>
+    </section>
+
+    <!-- Page 3: Patient Dashboard -->
+    <section id="dashboardPage" class="section">
+      <div class="container" style="padding-top: 2rem;">
+        <!-- Profile Header -->
+        <div class="card card-gradient mb-lg">
+          <div class="flex flex-between" style="align-items: center;">
+            <div>
+              <h2 id="welcomeBackText">Welcome Back</h2>
+              <h1 id="userName" style="color: white; margin: 0;">Ramesh Kumar</h1>
+              <p style="color: rgba(255,255,255,0.9);">Age: <span id="userAge">45</span> | <span
+                  id="userGender">Male</span></p>
+            </div>
+            <div style="text-align: right;">
+              <div class="badge badge-danger" style="font-size: 1.5rem; padding: 1rem 1.5rem;">
+                <span id="bloodGroupLabel">Blood Group</span>: <strong id="userBloodGroup">O+</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-3 gap-md mt-md">
+            <div>
+              <strong id="allergiesLabel">Allergies:</strong>
+              <div id="userAllergies" class="flex gap-sm mt-xs" style="flex-wrap: wrap;">
+                <span class="badge badge-warning">Penicillin</span>
+                <span class="badge badge-warning">Peanuts</span>
+              </div>
+            </div>
+            <div>
+              <strong id="chronicDiseasesLabel">Chronic Diseases:</strong>
+              <div id="userDiseases" class="flex gap-sm mt-xs" style="flex-wrap: wrap;">
+                <span class="badge badge-outline">Diabetes Type 2</span>
+              </div>
+            </div>
+            <div>
+              <strong id="assignedDoctorLabel">Assigned Doctor:</strong>
+              <p id="userDoctor" style="margin-top: 0.25rem;">Dr. Priya Sharma</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dashboard Cards -->
+        <div class="grid grid-3 gap-lg">
+          <div class="card" onclick="navigateTo('medicalHistory')" style="cursor: pointer;">
+            <div class="card-icon" style="background: var(--gradient-primary); color: white;">📋</div>
+            <h3 class="card-title" id="medicalHistoryTitle">Medical History</h3>
+            <p class="card-description" id="medicalHistoryDescText">View all your hospital visits and records</p>
+            <div class="mt-sm" style="font-size: 2rem; font-weight: bold; color: var(--primary-blue);">24 visits</div>
+          </div>
+
+          <div class="card" onclick="navigateTo('aiDiagnosis')" style="cursor: pointer;">
+            <div class="card-icon" style="background: var(--gradient-success); color: white;">🤖</div>
+            <h3 class="card-title" id="aiSelfCheckTitle">AI Report Check</h3>
+            <p class="card-description" id="aiSelfCheckDescText">Upload symptoms and get AI diagnosis</p>
+            <div class="badge badge-success mt-sm">Try Now →</div>
+          </div>
+
+          <div class="card" onclick="navigateTo('aiReportAnalyzer')" style="cursor: pointer;">
+            <div class="card-icon" style="background: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%); color: white;">
+              📊</div>
+            <h3 class="card-title">AI Medical Report</h3>
+            <p class="card-description">Analyze lab reports with AI</p>
+            <div class="badge badge-info mt-sm">Analyze Now →</div>
+          </div>
+
+          <div class="card card-emergency" onclick="navigateTo('emergency')" style="cursor: pointer;">
+            <div class="card-icon" style="background: white; color: var(--severity-critical);">🚨</div>
+            <h3 class="card-title" id="emergencySupportTitle" style="color: white;">Emergency Support</h3>
+            <p class="card-description" id="emergencySupportDescText" style="color: rgba(255,255,255,0.9);">Quick access
+              to emergency services</p>
+            <div class="badge" style="background: white; color: var(--severity-critical); margin-top: 0.5rem;">One-Tap
+              Access</div>
+          </div>
+
+          <div class="card" onclick="navigateTo('doctors')" style="cursor: pointer;">
+            <div class="card-icon" style="background: var(--accent-teal); color: white;">👨‍⚕️</div>
+            <h3 class="card-title" id="myDoctorsTitle">My Doctors & Visits</h3>
+            <p class="card-description" id="myDoctorsDescText">Manage your healthcare providers</p>
+            <div class="mt-sm" style="font-size: 1.25rem; font-weight: bold; color: var(--accent-teal);">3 doctors</div>
+          </div>
+
+          <div class="card" onclick="navigateTo('privacy')" style="cursor: pointer;">
+            <div class="card-icon" style="background: var(--dark-gray); color: white;">🔒</div>
+            <h3 class="card-title" id="privacyPermissionsTitle">Privacy & Permissions</h3>
+            <p class="card-description" id="privacyPermissionsDescText">Control who accesses your data</p>
+            <div class="badge badge-primary mt-sm">2 Active Permissions</div>
+          </div>
+
+          <div class="card" style="cursor: pointer; border-left: 4px solid var(--accent-purple);">
+            <div class="card-icon" style="background: linear-gradient(135deg, #6366F1 0%, #00BCD4 100%); color: white;">
+              🔐</div>
+            <h3 class="card-title">Blockchain Security</h3>
+            <p class="card-description">End-to-end encrypted records on Cardano</p>
+            <div class="badge badge-success mt-sm">🔗 Records Secured</div>
+          </div>
+
+          <div class="card" style="background: var(--off-white); opacity: 0.7;">
+            <div class="card-icon">⚙️</div>
+            <h3 class="card-title">Settings</h3>
+            <p class="card-description">Manage your account and preferences</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page 4: Medical History -->
+    <section id="medicalHistoryPage" class="section">
+      <div class="container" style="padding-top: 2rem;">
+        <button class="btn btn-outline mb-md" onclick="navigateTo('dashboard')">
+          ← <span id="backToDashboard">Back to Dashboard</span>
+        </button>
+
+        <div class="flex flex-between mb-md">
+          <div>
+            <h1 id="medicalHistoryPageTitle">Complete Medical History</h1>
+            <div class="badge badge-primary mt-xs">
+              ⛓️ <span id="blockchainBadgeText">Secured on Cardano Blockchain</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="card mb-lg">
+          <div class="grid grid-3 gap-md">
+            <div class="form-group">
+              <label class="form-label" id="filterYearLabel">Filter by Year</label>
+              <select class="form-select">
+                <option id="allYearsOption">All Years</option>
+                <option>2024</option>
+                <option>2023</option>
+                <option>2022</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" id="filterHospitalLabel">Search Hospital</label>
+              <input type="text" class="form-input" placeholder="Type hospital name...">
+            </div>
+            <div class="form-group">
+              <label class="form-label" id="filterDiseaseLabel">Disease Type</label>
+              <select class="form-select">
+                <option id="allDiseasesOption">All Diseases</option>
+                <option>Diabetes</option>
+                <option>Cardiology</option>
+                <option>General</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Medical Records Timeline -->
+        <div id="medicalRecordsList">
+          <!-- Sample Record 1 -->
+          <div class="card mb-md">
+            <div class="flex flex-between mb-sm">
+              <div>
+                <h3><span id="dateLabel1">Date:</span> 15 Nov 2024</h3>
+                <p style="color: var(--dark-gray); margin: 0;">
+                  <strong>Apollo Hospital, Bangalore</strong>
+                </p>
+              </div>
+              <div class="badge badge-success">Completed</div>
+            </div>
+            <div class="grid grid-2 gap-md mt-md">
+              <div>
+                <p><strong>Doctor:</strong> Dr. Priya Sharma (Endocrinologist)</p>
+                <p><strong>Diagnosis:</strong> Diabetes Type 2 - Routine Checkup</p>
+              </div>
+              <div class="flex gap-sm" style="justify-content: flex-end; flex-wrap: wrap;">
+                <button class="btn btn-outline">
+                  📄 <span id="downloadPDFText1">Download Prescription</span>
+                </button>
+                <button class="btn btn-primary">
+                  👁️ <span id="viewReportsText1">View Reports</span>
+                </button>
+                <button class="btn btn-success">
+                  🔗 <span id="shareWithDoctorText1">Share with Doctor</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sample Record 2 -->
+          <div class="card mb-md">
+            <div class="flex flex-between mb-sm">
+              <div>
+                <h3>Date: 3 Aug 2024</h3>
+                <p style="color: var(--dark-gray); margin: 0;">
+                  <strong>Fortis Hospital, Delhi</strong>
+                </p>
+              </div>
+              <div class="badge badge-success">Completed</div>
+            </div>
+            <div class="grid grid-2 gap-md mt-md">
+              <div>
+                <p><strong>Doctor:</strong> Dr. Rajesh Kumar (General Physician)</p>
+                <p><strong>Diagnosis:</strong> Viral Fever - Prescribed medication</p>
+              </div>
+              <div class="flex gap-sm" style="justify-content: flex-end; flex-wrap: wrap;">
+                <button class="btn btn-outline">📄 Download Prescription</button>
+                <button class="btn btn-primary">👁️ View Reports</button>
+                <button class="btn btn-success">🔗 Share with Doctor</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page 5: AI Diagnosis -->
+    <section id="aiDiagnosisPage" class="section">
+      <div class="container" style="max-width: 900px; padding-top: 2rem;">
+        <button class="btn btn-outline mb-md" onclick="navigateTo('dashboard')">
+          ← Back to Dashboard
+        </button>
+
+        <div class="text-center mb-lg">
+          <h1 id="aiDiagnosisTitleText">AI Health Diagnosis</h1>
+          <p style="font-size: 1.125rem; color: var(--dark-gray);" id="uploadOptionsText">
+            Upload Your Symptoms
+          </p>
+        </div>
+
+        <!-- Upload Options -->
+        <div class="grid grid-2 gap-md mb-lg">
+          <div class="card text-center" style="cursor: pointer;"
+            onclick="document.getElementById('imageUpload').click()">
+            <div class="card-icon" style="background: var(--primary-blue); color: white; margin: 0 auto;">📷</div>
+            <h3 class="card-title" id="uploadImageText">Upload Image</h3>
+            <p class="card-description">Photo of symptoms, wounds, or rashes</p>
+            <input type="file" id="imageUpload" accept="image/*" class="hidden">
+          </div>
+
+          <div class="card text-center" style="cursor: pointer;" onclick="document.getElementById('pdfUpload').click()">
+            <div class="card-icon" style="background: var(--primary-green); color: white; margin: 0 auto;">📄</div>
+            <h3 class="card-title" id="uploadPDFText">Upload Report (PDF)</h3>
+            <p class="card-description">Blood tests, X-rays, or lab results</p>
+            <input type="file" id="pdfUpload" accept="application/pdf" class="hidden">
+          </div>
+
+          <div class="card text-center">
+            <div class="card-icon" style="background: var(--accent-teal); color: white; margin: 0 auto;">✍️</div>
+            <h3 class="card-title" id="typeSymptomsText">Type Symptoms</h3>
+            <textarea id="symptomsText" class="form-input mt-sm" rows="3"
+              placeholder="Describe your symptoms..."></textarea>
+          </div>
+
+          <div class="card text-center" style="cursor: pointer;">
+            <div class="card-icon" style="background: var(--severity-medium); color: white; margin: 0 auto;">🎤</div>
+            <h3 class="card-title" id="voiceInputText">Voice Input</h3>
+            <p class="card-description">Speak your symptoms in your language</p>
+            <button class="btn btn-primary mt-sm">🎤 Start Recording</button>
+          </div>
+        </div>
+
+        <button id="btnAnalyzeSymptoms" class="btn btn-success btn-lg w-full mb-lg">
+          🤖 <span id="analyzeNowText">Analyze Now</span>
+        </button>
+
+        <!-- AI Results (hidden initially) -->
+        <div id="aiResults" class="hidden">
+          <!-- Loading State -->
+          <div id="aiLoading" class="card card-glass text-center mb-lg">
+            <div class="animate-spin" style="font-size: 4rem; margin: 2rem 0;">🤖</div>
+            <h3 id="aiAnalyzingText">AI is analyzing your symptoms...</h3>
+          </div>
+
+          <!-- Results Display -->
+          <div id="aiResultsDisplay" class="hidden">
+            <!-- Example: Mild Severity -->
+            <div class="card mb-md" style="border-left: 5px solid var(--severity-mild);">
+              <div class="flex flex-between mb-md">
+                <h2 id="possibleConditionLabel">Possible Condition</h2>
+                <div class="badge badge-success" id="severityBadge">
+                  🟢 <span id="mildText">Mild</span>
+                </div>
+              </div>
+              <h3 style="color: var(--primary-blue);">Common Cold / Viral Infection</h3>
+              <p style="color: var(--dark-gray);">Based on symptoms: fever, runny nose, and sore throat.</p>
+
+              <div class="mt-md">
+                <h4 id="homeRemediesLabel">Home Remedies:</h4>
+                <ul style="color: var(--dark-gray); line-height: 1.8;">
+                  <li>Rest and stay hydrated</li>
+                  <li>Drink warm water with honey and lemon</li>
+                  <li>Take steam inhalation</li>
+                  <li>Over-the-counter pain relievers if needed</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="card" style="background: var(--off-white);">
+              <p style="color: var(--severity-critical); font-weight: 600;" id="disclaimerText">
+                ⚠️ This is an AI recommendation, not a medical diagnosis. Always consult a qualified doctor.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page 6: Emergency Help -->
+    <section id="emergencyPage" class="section">
+      <div class="container" style="padding-top: 2rem;">
+        <button class="btn btn-outline mb-md" onclick="navigateTo('dashboard')">
+          ← Back to Dashboard
+        </button>
+
+        <div class="text-center mb-lg">
+          <h1 style="color: var(--severity-critical);" id="emergencyTitleText">🚨 Emergency Help</h1>
+        </div>
+
+        <!-- Emergency Info Card -->
+        <div class="card card-emergency mb-lg animate-pulse">
+          <div class="text-center">
+            <h2 style="color: white; font-size: 3rem; margin-bottom: 1rem;">SOS</h2>
+            <button class="btn btn-lg"
+              style="background: white; color: var(--severity-critical); padding: 1.5rem 3rem; font-size: 1.5rem;"
+              onclick="activateEmergency()">
+              🚨 <span id="activateEmergencyText">ACTIVATE EMERGENCY</span>
+            </button>
+            <p style="color: rgba(255,255,255,0.9); margin-top: 1rem; font-size: 0.95rem;">
+              Alerts all emergency contacts & nearby hospitals
+            </p>
+          </div>
+        </div>
+
+        <!-- Live Location Card -->
+        <div class="card mb-lg" style="border-left: 5px solid var(--primary-blue);">
+          <div class="flex flex-between mb-md">
+            <h2>📍 Your Live Location</h2>
+            <button class="btn btn-primary" onclick="updateLiveLocation()" id="updateLocationBtn">
+              🔄 Update Location
+            </button>
+          </div>
+          <div id="userLocationDisplay" style="font-size: 1.1rem;">
+            <p><strong>Status:</strong> <span id="locationStatus" style="color: var(--dark-gray);">Click 'Update
+                Location' to share</span></p>
+            <p id="locationCoords" class="hidden"><strong>Coordinates:</strong> <span id="coordsText"></span></p>
+            <p id="locationAddress" class="hidden"><strong>Address:</strong> <span id="addressText">Fetching
+                address...</span></p>
+          </div>
+          <div class="mt-sm">
+            <button class="btn btn-success" onclick="shareLocationWithContacts()" id="shareLocationBtn" disabled>
+              📤 Share Location with Emergency Contacts
+            </button>
+          </div>
+        </div>
+
+        <!-- Critical Info Grid -->
+        <div class="grid grid-3 gap-md mb-lg">
+          <div class="card text-center">
+            <h3 class="text-emergency" id="bloodGroupEmergency">Blood Group</h3>
+            <div style="font-size: 4rem; font-weight: bold; color: var(--severity-critical);">O+</div>
+          </div>
+
+          <div class="card">
+            <h3 class="text-emergency" id="allergiesEmergency">Allergies</h3>
+            <ul style="font-size: 1.25rem; line-height: 2;">
+              <li>⚠️ Penicillin</li>
+              <li>⚠️ Peanuts</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3 class="text-emergency" id="emergencyContactLabel">Emergency Contact</h3>
+            <p style="font-size: 1.25rem; margin-top: 1rem;">
+              <strong>Priya Kumar</strong><br>
+              +91 98765 12345
+            </p>
+            <button class="btn btn-success w-full mt-sm" onclick="callNumber('+919876512345')">
+              📞 Call Now
+            </button>
+          </div>
+        </div>
+
+        <!-- Emergency Doctors Directory -->
+        <div class="card mb-lg">
+          <h2>👨‍⚕️ Emergency Doctors Directory</h2>
+          <p style="color: var(--dark-gray); margin-bottom: 1.5rem;">24/7 Available Specialists</p>
+
+          <div class="grid grid-2 gap-md">
+            <!-- Doctor 1 -->
+            <div class="card" style="background: var(--off-white); border-left: 4px solid var(--severity-critical);">
+              <div class="flex flex-between mb-sm">
+                <div>
+                  <h3 style="margin: 0;">Dr. Rajesh Sharma</h3>
+                  <p style="color: var(--primary-blue); margin: 0.25rem 0; font-weight: 600;">Emergency Medicine</p>
+                  <p style="color: var(--dark-gray); font-size: 0.9rem; margin: 0.25rem 0;">Apollo Hospital</p>
+                </div>
+                <div class="badge badge-success">Available</div>
+              </div>
+              <p style="font-size: 1.1rem; font-weight: 600; margin: 0.5rem 0;">📞 +91 98765 11111</p>
+              <div class="flex gap-sm mt-sm">
+                <button class="btn btn-emergency btn-sm" onclick="callNumber('+919876511111')">📞 Call</button>
+                <button class="btn btn-outline btn-sm" onclick="sendSMS('+919876511111')">💬 SMS</button>
+              </div>
+            </div>
+
+            <!-- Doctor 2 -->
+            <div class="card" style="background: var(--off-white); border-left: 4px solid var(--severity-critical);">
+              <div class="flex flex-between mb-sm">
+                <div>
+                  <h3 style="margin: 0;">Dr. Priya Mehta</h3>
+                  <p style="color: var(--primary-blue); margin: 0.25rem 0; font-weight: 600;">Cardiologist</p>
+                  <p style="color: var(--dark-gray); font-size: 0.9rem; margin: 0.25rem 0;">Fortis Hospital</p>
+                </div>
+                <div class="badge badge-success">Available</div>
+              </div>
+              <p style="font-size: 1.1rem; font-weight: 600; margin: 0.5rem 0;">📞 +91 98765 22222</p>
+              <div class="flex gap-sm mt-sm">
+                <button class="btn btn-emergency btn-sm" onclick="callNumber('+919876522222')">📞 Call</button>
+                <button class="btn btn-outline btn-sm" onclick="sendSMS('+919876522222')">💬 SMS</button>
+              </div>
+            </div>
+
+            <!-- Doctor 3 -->
+            <div class="card" style="background: var(--off-white); border-left: 4px solid var(--severity-critical);">
+              <div class="flex flex-between mb-sm">
+                <div>
+                  <h3 style="margin: 0;">Dr. Amit Patel</h3>
+                  <p style="color: var(--primary-blue); margin: 0.25rem 0; font-weight: 600;">Trauma Surgeon</p>
+                  <p style="color: var(--dark-gray); font-size: 0.9rem; margin: 0.25rem 0;">Max Hospital</p>
+                </div>
+                <div class="badge badge-success">Available</div>
+              </div>
+              <p style="font-size: 1.1rem; font-weight: 600; margin: 0.5rem 0;">📞 +91 98765 33333</p>
+              <div class="flex gap-sm mt-sm">
+                <button class="btn btn-emergency btn-sm" onclick="callNumber('+919876533333')">📞 Call</button>
+                <button class="btn btn-outline btn-sm" onclick="sendSMS('+919876533333')">💬 SMS</button>
+              </div>
+            </div>
+
+            <!-- Doctor 4 -->
+            <div class="card" style="background: var(--off-white); border-left: 4px solid var(--severity-critical);">
+              <div class="flex flex-between mb-sm">
+                <div>
+                  <h3 style="margin: 0;">Dr. Sunita Reddy</h3>
+                  <p style="color: var(--primary-blue); margin: 0.25rem 0; font-weight: 600;">Neurologist</p>
+                  <p style="color: var(--dark-gray); font-size: 0.9rem; margin: 0.25rem 0;">AIIMS Delhi</p>
+                </div>
+                <div class="badge badge-warning">On Call</div>
+              </div>
+              <p style="font-size: 1.1rem; font-weight: 600; margin: 0.5rem 0;">📞 +91 98765 44444</p>
+              <div class="flex gap-sm mt-sm">
+                <button class="btn btn-emergency btn-sm" onclick="callNumber('+919876544444')">📞 Call</button>
+                <button class="btn btn-outline btn-sm" onclick="sendSMS('+919876544444')">💬 SMS</button>
+              </div>
+            </div>
+
+            <!-- Doctor 5 -->
+            <div class="card" style="background: var(--off-white); border-left: 4px solid var(--severity-critical);">
+              <div class="flex flex-between mb-sm">
+                <div>
+                  <h3 style="margin: 0;">Dr. Vikram Singh</h3>
+                  <p style="color: var(--primary-blue); margin: 0.25rem 0; font-weight: 600;">Pediatric Emergency</p>
+                  <p style="color: var(--dark-gray); font-size: 0.9rem; margin: 0.25rem 0;">Medanta Hospital</p>
+                </div>
+                <div class="badge badge-success">Available</div>
+              </div>
+              <p style="font-size: 1.1rem; font-weight: 600; margin: 0.5rem 0;">📞 +91 98765 55555</p>
+              <div class="flex gap-sm mt-sm">
+                <button class="btn btn-emergency btn-sm" onclick="callNumber('+919876555555')">📞 Call</button>
+                <button class="btn btn-outline btn-sm" onclick="sendSMS('+919876555555')">💬 SMS</button>
+              </div>
+            </div>
+
+            <!-- Doctor 6 -->
+            <div class="card" style="background: var(--off-white); border-left: 4px solid var(--severity-critical);">
+              <div class="flex flex-between mb-sm">
+                <div>
+                  <h3 style="margin: 0;">Dr. Kavita Desai</h3>
+                  <p style="color: var(--primary-blue); margin: 0.25rem 0; font-weight: 600;">General Physician</p>
+                  <p style="color: var(--dark-gray); font-size: 0.9rem; margin: 0.25rem 0;">Lilavati Hospital</p>
+                </div>
+                <div class="badge badge-success">Available</div>
+              </div>
+              <p style="font-size: 1.1rem; font-weight: 600; margin: 0.5rem 0;">📞 +91 98765 66666</p>
+              <div class="flex gap-sm mt-sm">
+                <button class="btn btn-emergency btn-sm" onclick="callNumber('+919876566666')">📞 Call</button>
+                <button class="btn btn-outline btn-sm" onclick="sendSMS('+919876566666')">💬 SMS</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Nearest Hospitals with Full Details -->
+        <div class="card mb-lg">
+          <h2 id="nearestHospitalsLabel">🏥 Nearest Hospitals with Live Availability</h2>
+          <p style="color: var(--dark-gray); margin-bottom: 1.5rem;">Real-time bed availability and contact information
+          </p>
+
+          <div class="mt-md">
+            <!-- Hospital 1 -->
+            <div class="card mb-md" style="background: var(--off-white); border-left: 5px solid var(--primary-green);">
+              <div class="flex flex-between mb-md">
+                <div style="flex: 1;">
+                  <h3 style="margin: 0;">🏥 Apollo Hospital</h3>
+                  <p style="color: var(--dark-gray); margin: 0.5rem 0;">
+                    <strong>Address:</strong> Sector 26, Noida, Uttar Pradesh 201301
+                  </p>
+                  <p style="color: var(--dark-gray); margin: 0.25rem 0;">
+                    <strong>📞 Emergency:</strong> <a href="tel:+911204048000"
+                      style="color: var(--severity-critical); font-weight: 600;">+91 120 404 8000</a>
+                  </p>
+                  <p style="color: var(--dark-gray); margin: 0.25rem 0;">
+                    <strong>📞 Ambulance:</strong> <a href="tel:+911204048108"
+                      style="color: var(--severity-critical); font-weight: 600;">+91 120 404 8108</a>
+                  </p>
+                  <p style="color: var(--dark-gray); margin: 0.25rem 0;">
+                    <strong>📍 Coordinates:</strong> 28.5706, 77.3272
+                  </p>
+                  <p style="color: var(--primary-blue); margin: 0.5rem 0;">
+                    <span id="distanceLabel1">Distance:</span> 2.3 km • 7 minutes
+                  </p>
+                  <div class="flex gap-sm mt-sm" style="flex-wrap: wrap;">
+                    <span class="badge badge-success">
+                      🛏️ <span id="bedAvailableText1">5 Beds Available</span>
+                    </span>
+                    <span class="badge badge-primary">
+                      🩸 <span id="bloodBankText1">O+ Available</span>
+                    </span>
+                    <span class="badge badge-info">
+                      🚑 Ambulance Ready
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="flex gap-sm" style="flex-wrap: wrap;">
+                <button class="btn btn-emergency" onclick="callNumber('+911204048000')">
+                  📞 Call Emergency
+                </button>
+                <button class="btn btn-danger" onclick="callNumber('+911204048108')">
+                  🚑 Call Ambulance
+                </button>
+                <button class="btn btn-primary" onclick="openMap(28.5706, 77.3272, 'Apollo Hospital')">
+                  🗺️ Get Directions
+                </button>
+                <button class="btn btn-success" onclick="sendMedicalID('Apollo Hospital')">
+                  📤 Send Medical ID
+                </button>
+              </div>
+            </div>
+
+            <!-- Hospital 2 -->
+            <div class="card mb-md" style="background: var(--off-white); border-left: 5px solid var(--primary-green);">
+              <div class="flex flex-between mb-md">
+                <div style="flex: 1;">
+                  <h3 style="margin: 0;">🏥 Fortis Hospital</h3>
+                  <p style="color: var(--dark-gray); margin: 0.5rem 0;">
+                    <strong>Address:</strong> Sector 62, Noida, Uttar Pradesh 201301
+                  </p>
+                  <p style="color: var(--dark-gray); margin: 0.25rem 0;">
+                    <strong>📞 Emergency:</strong> <a href="tel:+911206717000"
+                      style="color: var(--severity-critical); font-weight: 600;">+91 120 671 7000</a>
+                  </p>
+                  <p style="color: var(--dark-gray); margin: 0.25rem 0;">
+                    <strong>📞 Ambulance:</strong> <a href="tel:+911206717100"
+                      style="color: var(--severity-critical); font-weight: 600;">+91 120 671 7100</a>
+                  </p>
+                  <p style="color: var(--dark-gray); margin: 0.25rem 0;">
+                    <strong>📍 Coordinates:</strong> 28.6139, 77.3910
+                  </p>
+                  <p style="color: var(--primary-blue); margin: 0.5rem 0;">
+                    Distance: 4.1 km • 12 minutes
+                  </p>
+                  <div class="flex gap-sm mt-sm" style="flex-wrap: wrap;">
+                    <span class="badge badge-success">🛏️ 3 Beds Available</span>
+                    <span class="badge badge-warning">🩸 O+ Limited</span>
+                    <span class="badge badge-info">🚑 Ambulance Ready</span>
+                  </div>
+                </div>
+              </div>
+              <div class="flex gap-sm" style="flex-wrap: wrap;">
+                <button class="btn btn-emergency" onclick="callNumber('+911206717000')">
+                  📞 Call Emergency
+                </button>
+                <button class="btn btn-danger" onclick="callNumber('+911206717100')">
+                  🚑 Call Ambulance
+                </button>
+                <button class="btn btn-primary" onclick="openMap(28.6139, 77.3910, 'Fortis Hospital')">
+                  🗺️ Get Directions
+                </button>
+                <button class="btn btn-success" onclick="sendMedicalID('Fortis Hospital')">
+                  📤 Send Medical ID
+                </button>
+              </div>
+            </div>
+
+            <!-- Hospital 3 -->
+            <div class="card mb-md" style="background: var(--off-white); border-left: 5px solid var(--primary-green);">
+              <div class="flex flex-between mb-md">
+                <div style="flex: 1;">
+                  <h3 style="margin: 0;">🏥 Max Super Speciality Hospital</h3>
+                  <p style="color: var(--dark-gray); margin: 0.5rem 0;">
+                    <strong>Address:</strong> Sector 19, Noida, Uttar Pradesh 201301
+                  </p>
+                  <p style="color: var(--dark-gray); margin: 0.25rem 0;">
+                    <strong>📞 Emergency:</strong> <a href="tel:+911206177000"
+                      style="color: var(--severity-critical); font-weight: 600;">+91 120 617 7000</a>
+                  </p>
+                  <p style="color: var(--dark-gray); margin: 0.25rem 0;">
+                    <strong>📞 Ambulance:</strong> <a href="tel:+911206177108"
+                      style="color: var(--severity-critical); font-weight: 600;">+91 120 617 7108</a>
+                  </p>
+                  <p style="color: var(--dark-gray); margin: 0.25rem 0;">
+                    <strong>📍 Coordinates:</strong> 28.5355, 77.3910
+                  </p>
+                  <p style="color: var(--primary-blue); margin: 0.5rem 0;">
+                    Distance: 3.5 km • 10 minutes
+                  </p>
+                  <div class="flex gap-sm mt-sm" style="flex-wrap: wrap;">
+                    <span class="badge badge-success">🛏️ 8 Beds Available</span>
+                    <span class="badge badge-success">🩸 O+ Available</span>
+                    <span class="badge badge-info">🚑 2 Ambulances Ready</span>
+                  </div>
+                </div>
+              </div>
+              <div class="flex gap-sm" style="flex-wrap: wrap;">
+                <button class="btn btn-emergency" onclick="callNumber('+911206177000')">
+                  📞 Call Emergency
+                </button>
+                <button class="btn btn-danger" onclick="callNumber('+911206177108')">
+                  🚑 Call Ambulance
+                </button>
+                <button class="btn btn-primary" onclick="openMap(28.5355, 77.3910, 'Max Hospital')">
+                  🗺️ Get Directions
+                </button>
+                <button class="btn btn-success" onclick="sendMedicalID('Max Hospital')">
+                  📤 Send Medical ID
+                </button>
+              </div>
+            </div>
+
+            <!-- Hospital 4 -->
+            <div class="card mb-md" style="background: var(--off-white); border-left: 5px solid var(--primary-green);">
+              <div class="flex flex-between mb-md">
+                <div style="flex: 1;">
+                  <h3 style="margin: 0;">🏥 Medanta - The Medicity</h3>
+                  <p style="color: var(--dark-gray); margin: 0.5rem 0;">
+                    <strong>Address:</strong> Sector 38, Gurgaon, Haryana 122001
+                  </p>
+                  <p style="color: var(--dark-gray); margin: 0.25rem 0;">
+                    <strong>📞 Emergency:</strong> <a href="tel:+911244141414"
+                      style="color: var(--severity-critical); font-weight: 600;">+91 124 414 1414</a>
+                  </p>
+                  <p style="color: var(--dark-gray); margin: 0.25rem 0;">
+                    <strong>📞 Ambulance:</strong> <a href="tel:+911244141515"
+                      style="color: var(--severity-critical); font-weight: 600;">+91 124 414 1515</a>
+                  </p>
+                  <p style="color: var(--dark-gray); margin: 0.25rem 0;">
+                    <strong>📍 Coordinates:</strong> 28.4421, 77.0346
+                  </p>
+                  <p style="color: var(--primary-blue); margin: 0.5rem 0;">
+                    Distance: 5.8 km • 15 minutes
+                  </p>
+                  <div class="flex gap-sm mt-sm" style="flex-wrap: wrap;">
+                    <span class="badge badge-success">🛏️ 12 Beds Available</span>
+                    <span class="badge badge-success">🩸 All Blood Types</span>
+                    <span class="badge badge-info">🚑 3 Ambulances Ready</span>
+                  </div>
+                </div>
+              </div>
+              <div class="flex gap-sm" style="flex-wrap: wrap;">
+                <button class="btn btn-emergency" onclick="callNumber('+911244141414')">
+                  📞 Call Emergency
+                </button>
+                <button class="btn btn-danger" onclick="callNumber('+911244141515')">
+                  🚑 Call Ambulance
+                </button>
+                <button class="btn btn-primary" onclick="openMap(28.4421, 77.0346, 'Medanta Hospital')">
+                  🗺️ Get Directions
+                </button>
+                <button class="btn btn-success" onclick="sendMedicalID('Medanta Hospital')">
+                  📤 Send Medical ID
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- National Emergency Numbers -->
+        <div class="card mb-lg" style="background: var(--gradient-emergency); color: white;">
+          <h2 style="color: white;">🚨 National Emergency Numbers</h2>
+          <div class="grid grid-3 gap-md mt-md">
+            <div class="text-center">
+              <div style="font-size: 3rem; margin-bottom: 0.5rem;">🚑</div>
+              <h3 style="color: white; margin: 0.5rem 0;">Ambulance</h3>
+              <p style="font-size: 2rem; font-weight: bold; margin: 0.5rem 0;">102</p>
+              <button class="btn btn-lg mt-sm" style="background: white; color: var(--severity-critical);"
+                onclick="callNumber('102')">
+                📞 Call Now
+              </button>
+            </div>
+            <div class="text-center">
+              <div style="font-size: 3rem; margin-bottom: 0.5rem;">🚓</div>
+              <h3 style="color: white; margin: 0.5rem 0;">Police</h3>
+              <p style="font-size: 2rem; font-weight: bold; margin: 0.5rem 0;">100</p>
+              <button class="btn btn-lg mt-sm" style="background: white; color: var(--severity-critical);"
+                onclick="callNumber('100')">
+                📞 Call Now
+              </button>
+            </div>
+            <div class="text-center">
+              <div style="font-size: 3rem; margin-bottom: 0.5rem;">🚒</div>
+              <h3 style="color: white; margin: 0.5rem 0;">Fire</h3>
+              <p style="font-size: 2rem; font-weight: bold; margin: 0.5rem 0;">101</p>
+              <button class="btn btn-lg mt-sm" style="background: white; color: var(--severity-critical);"
+                onclick="callNumber('101')">
+                📞 Call Now
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Blood Donor Match -->
+        <div class="card" style="background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%); color: white;">
+          <h3 id="bloodDonorMatchText">🩸 Blood Donor Match Nearby (O+)</h3>
+          <p style="color: rgba(255,255,255,0.9);">2 registered donors found within 5 km radius</p>
+          <button class="btn btn-lg mt-sm" style="background: white; color: var(--severity-critical);"
+            onclick="contactBloodDonors()">
+            Contact Donors
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page 7: Privacy & Permissions -->
+    <section id="privacyPage" class="section">
+      <div class="container" style="padding-top: 2rem;">
+        <button class="btn btn-outline mb-md" onclick="navigateTo('dashboard')">
+          ← Back to Dashboard
+        </button>
+
+        <h1 id="privacyTitleText">Privacy & Permissions</h1>
+        <p style="font-size: 1.125rem; color: var(--dark-gray);">Control who accesses your medical data and for how long
+        </p>
+
+        <!-- Active Permissions -->
+        <div class="card mb-lg mt-lg">
+          <h2 id="activePermissionsLabel">Active Permissions</h2>
+
+          <div class="mt-md">
+            <!-- Permission 1 -->
+            <div class="card mb-sm" style="background: var(--off-white); border-left: 4px solid var(--primary-blue);">
+              <div class="flex flex-between">
+                <div>
+                  <h3>Dr. Priya Sharma</h3>
+                  <p style="color: var(--dark-gray); margin: 0.5rem 0;">
+                    <strong id="accessLevelLabel1">Access Level:</strong> Full Medical History
+                  </p>
+                  <span class="badge badge-primary">
+                    ⏰ <span id="timeRemainingLabel1">Time Remaining:</span> 18 hours
+                  </span>
+                </div>
+                <button class="btn btn-outline"
+                  style="border-color: var(--severity-critical); color: var(--severity-critical);">
+                  <span id="revokeAccessText1">Revoke Access</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Permission 2 -->
+            <div class="card" style="background: var(--off-white); border-left: 4px solid var(--primary-green);">
+              <div class="flex flex-between">
+                <div>
+                  <h3>Apollo Hospital Lab</h3>
+                  <p style="color: var(--dark-gray); margin: 0.5rem 0;">
+                    <strong>Access Level:</strong> Lab Reports Only
+                  </p>
+                  <span class="badge badge-success">⏰ Time Remaining: 3 days</span>
+                </div>
+                <button class="btn btn-outline"
+                  style="border-color: var(--severity-critical); color: var(--severity-critical);">
+                  Revoke Access
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grant New Access -->
+        <div class="card mb-lg">
+          <h2 id="grantAccessLabel">Grant New Access</h2>
+
+          <form class="mt-md">
+            <div class="form-group">
+              <label class="form-label" id="doctorNameLabel">Doctor/Hospital Name</label>
+              <input type="text" class="form-input" placeholder="Search doctor or hospital...">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" id="accessLevelLabelForm">Access Level</label>
+              <div class="grid grid-2 gap-sm">
+                <label style="display: flex; align-items: center; gap: 0.5rem;">
+                  <input type="checkbox"> <span id="fullHistoryText">Full Medical History</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.5rem;">
+                  <input type="checkbox"> <span id="recentVisitsText">Recent Visits Only</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.5rem;">
+                  <input type="checkbox"> <span id="specificConditionsText">Specific Conditions Only</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.5rem;">
+                  <input type="checkbox"> <span id="labReportsOnlyText">Lab Reports Only</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" id="selectDurationLabel">Select Duration</label>
+              <div class="grid grid-4 gap-sm">
+                <button type="button" class="btn btn-outline">
+                  <span id="hours6Text">6 Hours</span>
+                </button>
+                <button type="button" class="btn btn-outline">
+                  <span id="hours24Text">24 Hours</span>
+                </button>
+                <button type="button" class="btn btn-outline">
+                  <span id="week1Text">1 Week</span>
+                </button>
+                <button type="button" class="btn btn-outline">
+                  <span id="customText">Custom</span>
+                </button>
+              </div>
+            </div>
+
+            <button type="button" class="btn btn-success btn-lg w-full">
+              🔓 <span id="grantPermissionText">Grant Permission</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Access Logs -->
+        <div class="card">
+          <h2 id="accessLogsLabel">Access Logs</h2>
+          <p style="color: var(--dark-gray);">Blockchain-verified record of who viewed your data</p>
+
+          <div class="mt-md">
+            <table style="width: 100%; border-collapse: collapse;">
+              <thead>
+                <tr style="border-bottom: 2px solid var(--light-gray); text-align: left;">
+                  <th style="padding: 1rem;" id="whoAccessedLabel">Who</th>
+                  <th style="padding: 1rem;" id="whenAccessedLabel">When</th>
+                  <th style="padding: 1rem;" id="whatAccessedLabel">What Was Viewed</th>
+                  <th style="padding: 1rem;"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom: 1px solid var(--light-gray);">
+                  <td style="padding: 1rem;">Dr. Priya Sharma</td>
+                  <td style="padding: 1rem;">2 hours ago</td>
+                  <td style="padding: 1rem;">Full Medical History</td>
+                  <td style="padding: 1rem;">
+                    <button class="btn btn-outline" style="padding: 0.25rem 0.75rem; font-size: 0.875rem;">
+                      ⛓️ <span id="verifyBlockchainText1">Verify</span>
+                    </button>
+                  </td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--light-gray);">
+                  <td style="padding: 1rem;">Apollo Hospital Lab</td>
+                  <td style="padding: 1rem;">1 day ago</td>
+                  <td style="padding: 1rem;">Lab Reports</td>
+                  <td style="padding: 1rem;">
+                    <button class="btn btn-outline" style="padding: 0.25rem 0.75rem; font-size: 0.875rem;">⛓️
+                      Verify</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page 8: Doctor Dashboard -->
+    <section id="doctorDashboardPage" class="section">
+      <div class="container" style="padding-top: 2rem;">
+        <h1>👨‍⚕️ Doctor Dashboard</h1>
+        <p style="font-size: 1.125rem; color: var(--dark-gray);">Manage patients and add diagnoses</p>
+
+        <div class="grid grid-2 gap-lg mt-lg">
+          <!-- Patient Search -->
+          <div class="card">
+            <h2>Search Patient</h2>
+            <input type="text" class="form-input" placeholder="Patient name or ID...">
+
+            <div class="mt-md">
+              <h3>Permitted Patients (5)</h3>
+              <div class="card mt-sm" style="background: var(--off-white);">
+                <p><strong>Ramesh Kumar</strong></p>
+                <p style="color: var(--dark-gray); margin: 0.25rem 0;">Blood Group: O+ | Age: 45</p>
+                <button class="btn btn-primary btn-sm mt-xs">View Records</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Add Diagnosis -->
+          <div class="card">
+            <h2>Add Diagnosis</h2>
+            <form>
+              <div class="form-group">
+                <label class="form-label">Select Patient</label>
+                <select class="form-select">
+                  <option>Ramesh Kumar (O+)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Diagnosis</label>
+                <textarea class="form-input" rows="3" placeholder="Enter diagnosis..."></textarea>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Prescription</label>
+                <textarea class="form-input" rows="3" placeholder="Enter prescription..."></textarea>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Upload Test Results</label>
+                <input type="file" class="form-input" accept=".pdf,.jpg,.png">
+              </div>
+
+              <button type="button" class="btn btn-success w-full">
+                ⛓️ Submit Diagnosis (Blockchain)
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Emergency Alerts -->
+        <div class="card card-emergency mt-lg">
+          <h2 style="color: white;">🚨 Emergency Alerts</h2>
+          <p style="color: rgba(255,255,255,0.9);">No active emergency alerts</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page 9: Hospital Admin Dashboard -->
+    <section id="adminDashboardPage" class="section">
+      <div class="container" style="padding-top: 2rem;">
+        <h1>🏥 Hospital Admin Dashboard</h1>
+
+        <!-- Analytics Cards -->
+        <div class="grid grid-4 gap-md mt-lg mb-lg">
+          <div class="card card-gradient text-center">
+            <h2 style="color: white; font-size: 3rem; margin: 0;">1,247</h2>
+            <p style="color: rgba(255,255,255,0.9); font-weight: 600;">Total Patients</p>
+          </div>
+          <div class="card text-center" style="background: var(--primary-green); color: white;">
+            <h2 style="color: white; font-size: 3rem; margin: 0;">89</h2>
+            <p style="color: rgba(255,255,255,0.9); font-weight: 600;">Daily Visits</p>
+          </div>
+          <div class="card text-center" style="background: var(--severity-critical); color: white;">
+            <h2 style="color: white; font-size: 3rem; margin: 0;">3</h2>
+            <p style="color: rgba(255,255,255,0.9); font-weight: 600;">Emergency Cases</p>
+          </div>
+          <div class="card text-center" style="background: var(--accent-teal); color: white;">
+            <h2 style="color: white; font-size: 3rem; margin: 0;">24</h2>
+            <p style="color: rgba(255,255,255,0.9); font-weight: 600;">Doctors Active</p>
+          </div>
+        </div>
+
+        <div class="grid grid-2 gap-lg">
+          <!-- Doctor Verification -->
+          <div class="card">
+            <h2>Doctor Verification Queue (2)</h2>
+            <div class="card mt-md" style="background: var(--off-white);">
+              <p><strong>Dr. Amit Patel</strong></p>
+              <p style="color: var(--dark-gray); font-size: 0.875rem;">Cardiologist | License: MH12345</p>
+              <div class="flex gap-sm mt-sm">
+                <button class="btn btn-success">✅ Approve</button>
+                <button class="btn btn-outline"
+                  style="border-color: var(--severity-critical); color: var(--severity-critical);">❌ Reject</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Blood Bank Inventory -->
+          <div class="card">
+            <h2>🩸 Blood Bank Inventory</h2>
+            <div class="mt-md">
+              <div class="flex flex-between mb-sm">
+                <span><strong>O+</strong></span>
+                <span class="badge badge-success">12 units</span>
+              </div>
+              <div class="flex flex-between mb-sm">
+                <span><strong>A+</strong></span>
+                <span class="badge badge-success">8 units</span>
+              </div>
+              <div class="flex flex-between mb-sm">
+                <span><strong>B+</strong></span>
+                <span class="badge badge-warning">3 units</span>
+              </div>
+              <div class="flex flex-between">
+                <span><strong>AB+</strong></span>
+                <span class="badge badge-danger">1 unit</span>
+              </div>
+              <button class="btn btn-primary w-full mt-md">Update Stock</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Doctors Page (Simple List) -->
+    <section id="doctorsPage" class="section">
+      <div class="container" style="padding-top: 2rem;">
+        <button class="btn btn-outline mb-md" onclick="navigateTo('dashboard')">
+          ← Back to Dashboard
+        </button>
+
+        <h1>My Doctors & Visits</h1>
+
+        <div class="grid grid-3 gap-md mt-lg">
+          <div class="card">
+            <div style="font-size: 3rem; text-align: center;">👨‍⚕️</div>
+            <h3>Dr. Priya Sharma</h3>
+            <p style="color: var(--dark-gray);">Endocrinologist</p>
+            <p style="font-size: 0.875rem; margin-top: 0.5rem;">Last Visit: 15 Nov 2024</p>
+            <button class="btn btn-primary w-full mt-sm">View History</button>
+          </div>
+
+          <div class="card">
+            <div style="font-size: 3rem; text-align: center;">👨‍⚕️</div>
+            <h3>Dr. Rajesh Kumar</h3>
+            <p style="color: var(--dark-gray);">General Physician</p>
+            <p style="font-size: 0.875rem; margin-top: 0.5rem;">Last Visit: 3 Aug 2024</p>
+            <button class="btn btn-primary w-full mt-sm">View History</button>
+          </div>
+
+          <div class="card">
+            <div style="font-size: 3rem; text-align: center;">👨‍⚕️</div>
+            <h3>Dr. Sneha Reddy</h3>
+            <p style="color: var(--dark-gray);">Cardiologist</p>
+            <p style="font-size: 0.875rem; margin-top: 0.5rem;">Last Visit: 12 Mar 2024</p>
+            <button class="btn btn-primary w-full mt-sm">View History</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- AI Report Analyzer Page -->
+  <section id="aiReportAnalyzerPage" class="section">
+    <div id="aiReportAnalyzerContainer"></div>
+  </section>
+
+  <!-- Offline Indicator -->
+  <div id="offlineIndicator" class="hidden"
+    style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 9999;">
+    <div class="card" style="background: var(--severity-medium); color: white; padding: 1rem 2rem;">
+      📡 <span id="offlineModeText">You're Offline - Limited functionality available</span>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="translations.js"></script>
+  <script src="ai-report-analyzer.js"></script>
+  <script src="app.js"></script>
+  </body>
+
+</html>

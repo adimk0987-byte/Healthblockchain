@@ -1,0 +1,2216 @@
+/* ==========================================
+   HealthChain ID - Futuristic Medical UI with Indian Soul
+   Hackathon-Winning Premium Design System
+   ========================================== */
+
+/* Import Premium Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* ==========================================
+   CSS Variables - Indian Medical Design Tokens
+   ========================================== */
+:root {
+  /* Premium Indian Color Palette */
+  --bharat-blue: #0A3A8D;
+  --bharat-blue-dark: #072A6B;
+  --bharat-blue-light: #0D47A1;
+  --ayushman-teal: #00A8A8;
+  --ayushman-teal-dark: #008080;
+  --india-saffron: #FF9933;
+  --india-saffron-light: #FFB366;
+  --lotus-pink: #E6399B;
+  --ashoka-navy: #0D1B4C;
+  --pure-white: #FFFFFF;
+  --ayurvedic-cream: #FFF9F0;
+  --light-gray: #F0F2F5;
+  --dark-gray: #64748B;
+  --charcoal: #1E293B;
+  
+  /* Modern Medical Gradients */
+  --gradient-medical: linear-gradient(135deg, #0A3A8D 0%, #00A8A8 50%, #0D1B4C 100%);
+  --gradient-saffron: linear-gradient(135deg, #FF9933 0%, #FFB366 100%);
+  --gradient-teal: linear-gradient(135deg, #00A8A8 0%, #00D4D4 100%);
+  --gradient-emergency: linear-gradient(135deg, #E6399B 0%, #FF6B6B 100%);
+  --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  
+  /* Premium Shadows with Indian Touch */
+  --shadow-mandala: 0 8px 32px rgba(10, 58, 141, 0.1);
+  --shadow-lotus: 0 15px 40px rgba(230, 57, 155, 0.15);
+  --shadow-premium: 0 25px 50px rgba(13, 27, 76, 0.15);
+  --shadow-glow-blue: 0 0 40px rgba(10, 58, 141, 0.3);
+  --shadow-glow-teal: 0 0 40px rgba(0, 168, 168, 0.3);
+  --shadow-neon: 0 0 20px rgba(0, 168, 168, 0.5);
+  
+  /* Spacing System */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --space-2xl: 4rem;
+  --space-3xl: 6rem;
+  
+  /* Border Radius - Paper Card Feel */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+  --radius-full: 50px;
+  
+  /* Premium Animations */
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-premium: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  
+  /* Typography */
+  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Space Grotesk', 'Inter', sans-serif;
+  --font-indian: 'Poppins', sans-serif;
+  
+  /* Glass Morphism */
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* ==========================================
+   Base Reset with Premium Enhancements
+   ========================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-primary);
+  background: linear-gradient(135deg, var(--ayurvedic-cream) 0%, var(--pure-white) 50%, #f0f8ff 100%);
+  color: var(--ashoka-navy);
+  line-height: 1.7;
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Indian Pattern Background */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 20% 80%, rgba(255, 153, 51, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(0, 168, 168, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(230, 57, 155, 0.02) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
+  animation: backgroundFloat 20s ease-in-out infinite;
+}
+
+
+/* ==========================================
+   Advanced Animations
+   ========================================== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(230, 57, 155, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(230, 57, 155, 0.8);
+  }
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  25% { transform: scale(1.1); }
+  50% { transform: scale(1); }
+  75% { transform: scale(1.1); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+@keyframes ecgLine {
+  0% { stroke-dashoffset: 1000; }
+  100% { stroke-dashoffset: 0; }
+}
+
+@keyframes backgroundFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(-5px, -5px) scale(1.02); }
+  50% { transform: translate(5px, 5px) scale(1); }
+  75% { transform: translate(-5px, 5px) scale(1.01); }
+}
+
+@keyframes neonPulse {
+  0%, 100% {
+    box-shadow: 
+      0 0 5px currentColor,
+      0 0 10px currentColor,
+      0 0 15px currentColor;
+  }
+  50% {
+    box-shadow: 
+      0 0 10px currentColor,
+      0 0 20px currentColor,
+      0 0 30px currentColor;
+  }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+/* ==========================================
+   Layout & Container System
+   ========================================== */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+.section {
+  display: none;
+  min-height: 100vh;
+  padding: var(--space-xl) 0;
+  animation: fadeInUp 0.8s var(--ease-smooth);
+}
+
+.section.active {
+  display: block;
+}
+
+/* ==========================================
+   Premium Typography System
+   ========================================== */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: var(--space-sm);
+  background: linear-gradient(135deg, var(--ashoka-navy) 0%, var(--bharat-blue) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+}
+
+h1 { 
+  font-size: 3.5rem;
+  margin-bottom: var(--space-md);
+  animation: fadeInUp 0.8s var(--ease-smooth) 0.2s both;
+}
+
+h2 { 
+  font-size: 2.5rem;
+  margin-bottom: var(--space-sm);
+}
+
+h3 { 
+  font-size: 2rem;
+  margin-bottom: var(--space-sm);
+}
+
+p {
+  margin-bottom: var(--space-sm);
+  color: var(--dark-gray);
+}
+
+.medical-title {
+  font-family: var(--font-indian);
+  position: relative;
+  display: inline-block;
+}
+
+.medical-title::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 60%;
+  height: 3px;
+  background: var(--gradient-saffron);
+  border-radius: var(--radius-full);
+  animation: slideInLeft 0.8s var(--ease-smooth) 0.5s both;
+}
+
+/* ==========================================
+   Glass Morphism Navigation
+   ========================================== */
+.header {
+  position: sticky;
+  top: 0;
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--glass-border);
+  z-index: 1000;
+  padding: var(--space-md) 0;
+  transition: all 0.4s var(--ease-smooth);
+  animation: slideInDown 0.6s var(--ease-smooth);
+}
+
+@keyframes slideInDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.header.scrolled {
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: var(--shadow-mandala);
+  padding: var(--space-sm) 0;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--bharat-blue);
+  font-family: var(--font-display);
+  transition: all 0.3s var(--ease-smooth);
+}
+
+.logo:hover {
+  transform: translateY(-2px);
+}
+
+#appLogo {
+  height: 40px;
+  cursor: pointer;
+  transition: all 0.4s var(--ease-bounce);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-mandala);
+}
+
+#appLogo:hover {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: var(--shadow-glow-blue);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+/* ==========================================
+   Premium Buttons with Indian Accents
+   ========================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-lg);
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  transition: all 0.4s var(--ease-bounce);
+  position: relative;
+  overflow: hidden;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.6s;
+}
+
+.btn:hover::before {
+  left: 100%;
+}
+
+.btn:hover {
+  transform: translateY(-4px) translateZ(10px);
+}
+
+.btn-primary {
+  background: var(--gradient-medical);
+  color: var(--pure-white);
+  box-shadow: var(--shadow-premium);
+}
+
+.btn-primary:hover {
+  box-shadow: var(--shadow-glow-blue);
+  animation: neonPulse 2s ease-in-out infinite;
+}
+
+.btn-success {
+  background: var(--gradient-teal);
+  color: var(--pure-white);
+  box-shadow: var(--shadow-premium);
+}
+
+.btn-success:hover {
+  box-shadow: var(--shadow-glow-teal);
+}
+
+.btn-emergency {
+  background: var(--gradient-emergency);
+  color: var(--pure-white);
+  animation: pulseGlow 2s ease-in-out infinite;
+  box-shadow: var(--shadow-premium);
+}
+
+.btn-emergency:hover {
+  animation: pulseGlow 0.5s ease-in-out infinite;
+  transform: scale(1.05) translateY(-4px);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--bharat-blue);
+  color: var(--bharat-blue);
+  transition: all 0.4s var(--ease-smooth);
+}
+
+.btn-outline:hover {
+  background: var(--bharat-blue);
+  color: var(--pure-white);
+  transform: translateY(-2px);
+}
+
+.btn-lg {
+  padding: var(--space-lg) var(--space-xl);
+  font-size: 1.125rem;
+}
+
+.btn-icon {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s var(--ease-bounce);
+}
+
+.btn-icon:hover {
+  transform: scale(1.1) rotate(12deg);
+}
+
+/* ==========================================
+   Animated Cards with Indian Paper Feel
+   ========================================== */
+.card {
+  background: var(--pure-white);
+  border-radius: var(--radius-xl);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-mandala);
+  transition: all 0.4s var(--ease-smooth);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--gradient-saffron);
+  transform: scaleX(0);
+  transition: transform 0.4s var(--ease-smooth);
+}
+
+.card:hover::before {
+  transform: scaleX(1);
+}
+
+.card:hover {
+  transform: translateY(-8px) rotateX(5deg) rotateY(5deg) scale(1.02);
+  box-shadow: var(--shadow-premium);
+}
+
+.card-glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  color: var(--pure-white);
+}
+
+.card-gradient {
+  background: var(--gradient-medical);
+  color: var(--pure-white);
+  border: none;
+}
+
+.card-emergency {
+  background: var(--gradient-emergency);
+  color: var(--pure-white);
+  border: 2px solid var(--lotus-pink);
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+.card-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin-bottom: var(--space-md);
+  transition: all 0.4s var(--ease-bounce);
+  position: relative;
+  overflow: hidden;
+}
+
+.card-icon::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M0 50 L20 30 L40 70 L60 30 L80 70 L100 50" stroke="white" stroke-width="2" fill="none" stroke-dasharray="1000" stroke-dashoffset="1000"/></svg>') no-repeat center;
+  animation: ecgLine 3s linear infinite;
+  opacity: 0.3;
+}
+
+.card:hover .card-icon {
+  transform: scale(1.1) rotateZ(5deg);
+  animation: heartbeat 1s ease-in-out;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: var(--space-xs);
+  font-family: var(--font-display);
+}
+
+.card-description {
+  font-size: 0.875rem;
+  color: var(--dark-gray);
+  line-height: 1.6;
+}
+
+/* ==========================================
+   Premium Grid System
+   ========================================== */
+.grid {
+  display: grid;
+  gap: var(--space-lg);
+  animation: fadeInUp 0.8s var(--ease-smooth) 0.3s both;
+}
+
+.grid-2 {
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+}
+
+.grid-3 {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.grid-4 {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+/* ==========================================
+   Form Elements
+   ========================================== */
+.form-group {
+  margin-bottom: var(--space-lg);
+  position: relative;
+  animation: fadeInUp 0.6s var(--ease-smooth) both;
+}
+
+.form-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: var(--space-xs);
+  color: var(--charcoal);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.form-input,
+.form-select {
+  width: 100%;
+  padding: var(--space-md) var(--space-lg);
+  font-size: 1rem;
+  border: 2px solid rgba(10, 58, 141, 0.1);
+  border-radius: var(--radius-lg);
+  background: var(--pure-white);
+  transition: all 0.3s var(--ease-smooth);
+  font-family: var(--font-primary);
+}
+
+.form-input:focus,
+.form-select:focus {
+  border-color: var(--ayushman-teal);
+  box-shadow: 0 0 0 4px rgba(0, 168, 168, 0.1);
+  outline: none;
+  transform: translateY(-2px);
+  animation: neonPulse 2s ease-in-out infinite;
+}
+
+.form-select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%230A3A8D' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--space-md) center;
+  padding-right: var(--space-2xl);
+}
+
+/* ==========================================
+   Badges & Status Indicators
+   ========================================== */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-md);
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: var(--shadow-mandala);
+  transition: all 0.3s var(--ease-smooth);
+  animation: fadeInUp 0.6s var(--ease-smooth) both;
+}
+
+.badge:hover {
+  transform: translateY(-2px) scale(1.05);
+}
+
+.badge-primary {
+  background: rgba(10, 58, 141, 0.1);
+  color: var(--bharat-blue);
+  border: 1px solid rgba(10, 58, 141, 0.2);
+}
+
+.badge-success {
+  background: rgba(0, 168, 168, 0.1);
+  color: var(--ayushman-teal);
+  border: 1px solid rgba(0, 168, 168, 0.2);
+}
+
+.badge-warning {
+  background: rgba(255, 153, 51, 0.1);
+  color: var(--india-saffron);
+  border: 1px solid rgba(255, 153, 51, 0.2);
+}
+
+.badge-danger {
+  background: rgba(230, 57, 155, 0.1);
+  color: var(--lotus-pink);
+  border: 1px solid rgba(230, 57, 155, 0.2);
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+.badge-outline {
+  background: transparent;
+  border: 2px solid var(--bharat-blue);
+  color: var(--bharat-blue);
+}
+
+/* ==========================================
+   Animation Classes
+   ========================================== */
+.animate-fadeIn {
+  animation: fadeInUp 0.8s var(--ease-smooth) forwards;
+}
+
+.animate-slideInLeft {
+  animation: slideInLeft 0.8s var(--ease-smooth) forwards;
+}
+
+.animate-slideInRight {
+  animation: slideInRight 0.8s var(--ease-smooth) forwards;
+}
+
+.animate-pulse {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+.animate-delay-1 { animation-delay: 0.2s; opacity: 0; }
+.animate-delay-2 { animation-delay: 0.4s; opacity: 0; }
+.animate-delay-3 { animation-delay: 0.6s; opacity: 0; }
+
+/* ==========================================
+   Utility Classes
+   ========================================== */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.text-saffron { color: var(--india-saffron); }
+.text-teal { color: var(--ayushman-teal); }
+.text-bharat { color: var(--bharat-blue); }
+.text-emergency { color: var(--lotus-pink); }
+
+.flex { display: flex; }
+.flex-center { 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+}
+.flex-between { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+}
+.flex-col { flex-direction: column; }
+.flex-wrap { flex-wrap: wrap; }
+
+.gap-xs { gap: var(--space-xs); }
+.gap-sm { gap: var(--space-sm); }
+.gap-md { gap: var(--space-md); }
+.gap-lg { gap: var(--space-lg); }
+
+.mt-xs { margin-top: var(--space-xs); }
+.mt-sm { margin-top: var(--space-sm); }
+.mt-md { margin-top: var(--space-md); }
+.mt-lg { margin-top: var(--space-lg); }
+.mb-xs { margin-bottom: var(--space-xs); }
+.mb-sm { margin-bottom: var(--space-sm); }
+.mb-md { margin-bottom: var(--space-md); }
+.mb-lg { margin-bottom: var(--space-lg); }
+
+.p-sm { padding: var(--space-sm); }
+.p-md { padding: var(--space-md); }
+.p-lg { padding: var(--space-lg); }
+
+.w-full { width: 100%; }
+.h-full { height: 100%; }
+
+.rounded { border-radius: var(--radius-md); }
+.rounded-lg { border-radius: var(--radius-lg); }
+.rounded-xl { border-radius: var(--radius-xl); }
+.rounded-full { border-radius: var(--radius-full); }
+
+.hidden { display: none !important; }
+.visible { display: block !important; }
+
+/* ==========================================
+   Indian Cultural Elements (Subtle)
+   ========================================== */
+.saffron-stripe {
+  height: 3px;
+  background: var(--gradient-saffron);
+  border-radius: var(--radius-full);
+  margin: var(--space-md) 0;
+  animation: slideInLeft 0.8s var(--ease-smooth) 0.5s both;
+}
+
+.mandala-pattern {
+  background-image: radial-gradient(circle at center, rgba(255, 153, 51, 0.1) 0%, transparent 70%);
+  position: absolute;
+  pointer-events: none;
+  z-index: -1;
+  animation: float 20s ease-in-out infinite;
+}
+
+/* ==========================================
+   Floating Particles Background
+   ========================================== */
+.floating-particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.particle {
+  position: absolute;
+  background: var(--gradient-saffron);
+  border-radius: 50%;
+  opacity: 0.1;
+  animation: float 6s ease-in-out infinite;
+}
+
+/* ==========================================
+   Custom Cursor
+   ========================================== */
+.custom-cursor {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  background: var(--gradient-medical);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transition: transform 0.2s var(--ease-smooth);
+}
+
+.custom-cursor.hover {
+  transform: scale(1.5);
+}
+
+.custom-cursor.click {
+  transform: scale(0.8);
+}
+
+/* ==========================================
+   Emergency Page Specific Styles
+   ========================================== */
+.emergency-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-md);
+  margin: var(--space-lg) 0;
+}
+
+.doctor-card {
+  background: var(--off-white);
+  border-left: 4px solid var(--severity-critical);
+  transition: all 0.3s var(--ease-bounce);
+}
+
+.doctor-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  border-left-color: var(--india-saffron);
+}
+
+.hospital-card {
+  background: var(--off-white);
+  border-left: 5px solid var(--primary-green);
+  transition: all 0.3s var(--ease-smooth);
+}
+
+.hospital-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-premium);
+}
+
+/* ==========================================
+   Responsive Design
+   ========================================== */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 var(--space-sm);
+  }
+  
+  h1 { font-size: 2.25rem; }
+  h2 { font-size: 2rem; }
+  h3 { font-size: 1.75rem; }
+  
+  .header-content {
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+  
+  .header-actions {
+    justify-content: flex-end;
+    flex-grow: 1;
+  }
+  
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: 1fr;
+  }
+  
+  .btn-lg {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .flex-between {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+  }
+  
+  .card {
+    padding: var(--space-md);
+  }
+  
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .header-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+/* ==========================================
+   Accessibility & Performance
+   ========================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* High Contrast Support */
+@media (prefers-contrast: high) {
+  :root {
+    --bharat-blue: #000080;
+    --india-saffron: #FF8C00;
+    --ayushman-teal: #008B8B;
+  }
+}
+
+/* Premium Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(10, 58, 141, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gradient-medical);
+  border-radius: var(--radius-full);
+  transition: all 0.3s var(--ease-smooth);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--bharat-blue);
+  transform: scale(1.1);
+}
+
+/* ==========================================
+   Loading States
+   ========================================== */
+.loading-shimmer {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* ==========================================
+   Offline Indicator
+   ========================================== */
+#offlineIndicator {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  animation: slideInUp 0.6s var(--ease-smooth);
+}
+
+/* ==========================================
+   Hero Section Specific Styles
+   ========================================== */
+.hero-section {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-2xl) 0;
+}
+
+.hero-illustration {
+  max-width: 600px;
+  margin: var(--space-xl) auto;
+  padding: var(--space-xl);
+  animation: float 8s ease-in-out infinite;
+}
+
+/* ==========================================
+   Final Polish & Micro-Interactions
+   ========================================== */
+*:focus {
+  outline: 2px solid var(--ayushman-teal);
+  outline-offset: 2px;
+  animation: neonPulse 2s ease-in-out infinite;
+}
+
+::selection {
+  background: var(--india-saffron);
+  color: var(--pure-white);
+}
+
+/* Smooth state transitions */
+* {
+  transition: color 0.3s var(--ease-smooth), background-color 0.3s var(--ease-smooth);
+}
+
+/* ==========================================
+   Hackathon-Winning Final Touches
+   ========================================== */
+.healthchain-glow {
+  position: relative;
+}
+
+.healthchain-glow::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: var(--gradient-medical);
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s var(--ease-smooth);
+}
+
+.healthchain-glow:hover::after {
+  opacity: 0.3;
+}
+
+/* Medical data visualization enhancements */
+.data-visualization {
+  background: linear-gradient(135deg, var(--pure-white) 0%, #f8fafc 100%);
+  border-left: 4px solid var(--ayushman-teal);
+  animation: ecgLine 3s linear infinite;
+}
+
+/* Emergency mode activation */
+.emergency-mode {
+  animation: emergencyPulse 1s ease-in-out infinite;
+}
+
+@keyframes emergencyPulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(230, 57, 155, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(230, 57, 155, 0.8), 0 0 60px rgba(230, 57, 155, 0.6);
+  }
+}
+
+/* ==========================================
+   3D Card Enhancements
+   ========================================== */
+.card-3d {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.card-3d:hover {
+  transform: rotateY(5deg) rotateX(5deg) translateZ(10px);
+}
+
+/* ==========================================
+   END OF HACKATHON-WINNING CSS
+   ========================================== */
+
+
+
+
+
+
+
+   /* ==========================================
+   Dark Mode - Futuristic Medical Theme
+   ========================================== */
+
+[data-theme="dark"] {
+  /* Dark Mode Color Palette */
+  --pure-white: #0F172A;
+  --ayurvedic-cream: #1A1F36;
+  --ashoka-navy: #E2E8F0;
+  --light-gray: #1E293B;
+  --dark-gray: #CBD5E1;
+  --charcoal: #F1F5F9;
+  --bharat-blue: #3B82F6;
+  --bharat-blue-dark: #1D4ED8;
+  --bharat-blue-light: #60A5FA;
+  --ayushman-teal: #06D6A0;
+  --ayushman-teal-dark: #059669;
+  --india-saffron: #F59E0B;
+  --india-saffron-light: #FBBF24;
+  --lotus-pink: #EC4899;
+  
+  /* Dark Mode Gradients */
+  --gradient-medical: linear-gradient(135deg, #1E40AF 0%, #059669 50%, #1E293B 100%);
+  --gradient-saffron: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%);
+  --gradient-teal: linear-gradient(135deg, #06D6A0 0%, #34D399 100%);
+  --gradient-emergency: linear-gradient(135deg, #EC4899 0%, #F87171 100%);
+  --gradient-glass: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.9) 100%);
+  
+  /* Dark Mode Shadows */
+  --shadow-mandala: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --shadow-lotus: 0 15px 40px rgba(236, 72, 153, 0.2);
+  --shadow-premium: 0 25px 50px rgba(0, 0, 0, 0.4);
+  --shadow-glow-blue: 0 0 40px rgba(59, 130, 246, 0.4);
+  --shadow-glow-teal: 0 0 40px rgba(6, 214, 160, 0.4);
+  
+  /* Glass Morphism for Dark Mode */
+  --glass-bg: rgba(30, 41, 59, 0.8);
+  --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] body {
+  background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #334155 100%);
+  color: var(--charcoal);
+}
+
+[data-theme="dark"] body::before {
+  background-image: 
+    radial-gradient(circle at 20% 80%, rgba(245, 158, 11, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(6, 214, 160, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(236, 72, 153, 0.03) 0%, transparent 50%);
+}
+
+/* Dark Mode Header */
+[data-theme="dark"] .header {
+  background: rgba(15, 23, 42, 0.95);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+}
+
+[data-theme="dark"] .header.scrolled {
+  background: rgba(15, 23, 42, 0.98);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .logo {
+  color: var(--bharat-blue-light);
+}
+
+/* Dark Mode Cards */
+[data-theme="dark"] .card {
+  background: var(--glass-bg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--charcoal);
+}
+
+[data-theme="dark"] .card:hover {
+  background: rgba(30, 41, 59, 0.9);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+[data-theme="dark"] .card-glass {
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--charcoal);
+}
+
+[data-theme="dark"] .card-gradient {
+  background: var(--gradient-medical);
+  color: var(--pure-white);
+}
+
+[data-theme="dark"] .card-emergency {
+  background: var(--gradient-emergency);
+  color: var(--pure-white);
+  border-color: var(--lotus-pink);
+}
+
+/* Dark Mode Typography */
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6 {
+  background: linear-gradient(135deg, var(--charcoal) 0%, var(--bharat-blue-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+[data-theme="dark"] p {
+  color: var(--dark-gray);
+}
+
+[data-theme="dark"] .card-description {
+  color: var(--dark-gray);
+}
+
+/* Dark Mode Form Elements */
+[data-theme="dark"] .form-input,
+[data-theme="dark"] .form-select {
+  background: rgba(30, 41, 59, 0.8);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  color: var(--charcoal);
+}
+
+[data-theme="dark"] .form-input:focus,
+[data-theme="dark"] .form-select:focus {
+  border-color: var(--ayushman-teal);
+  box-shadow: 0 0 0 4px rgba(6, 214, 160, 0.2);
+  background: rgba(30, 41, 59, 0.9);
+}
+
+[data-theme="dark"] .form-label {
+  color: var(--charcoal);
+}
+
+/* Dark Mode Buttons */
+[data-theme="dark"] .btn-outline {
+  background: transparent;
+  border: 2px solid var(--bharat-blue-light);
+  color: var(--bharat-blue-light);
+}
+
+[data-theme="dark"] .btn-outline:hover {
+  background: var(--bharat-blue-light);
+  color: var(--pure-white);
+}
+
+[data-theme="dark"] .btn-icon {
+  background: rgba(30, 41, 59, 0.8);
+  color: var(--charcoal);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .btn-icon:hover {
+  background: var(--bharat-blue-light);
+  color: var(--pure-white);
+}
+
+/* Dark Mode Badges */
+[data-theme="dark"] .badge-primary {
+  background: rgba(59, 130, 246, 0.2);
+  color: var(--bharat-blue-light);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+[data-theme="dark"] .badge-success {
+  background: rgba(6, 214, 160, 0.2);
+  color: var(--ayushman-teal);
+  border: 1px solid rgba(6, 214, 160, 0.3);
+}
+
+[data-theme="dark"] .badge-warning {
+  background: rgba(245, 158, 11, 0.2);
+  color: var(--india-saffron);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+[data-theme="dark"] .badge-danger {
+  background: rgba(236, 72, 153, 0.2);
+  color: var(--lotus-pink);
+  border: 1px solid rgba(236, 72, 153, 0.3);
+}
+
+[data-theme="dark"] .badge-outline {
+  background: transparent;
+  border: 2px solid var(--bharat-blue-light);
+  color: var(--bharat-blue-light);
+}
+
+/* Dark Mode Tables */
+[data-theme="dark"] table {
+  color: var(--charcoal);
+}
+
+[data-theme="dark"] th {
+  background: rgba(30, 41, 59, 0.8);
+  color: var(--charcoal);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] td {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--dark-gray);
+}
+
+/* Dark Mode Footer & Mission Statement */
+[data-theme="dark"] footer {
+  border-top: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] #missionStatement {
+  color: var(--charcoal);
+}
+
+/* Dark Mode Emergency Page Specific Styles */
+[data-theme="dark"] .doctor-card {
+  background: rgba(30, 41, 59, 0.8);
+  border-left: 4px solid var(--lotus-pink);
+}
+
+[data-theme="dark"] .hospital-card {
+  background: rgba(30, 41, 59, 0.8);
+  border-left: 5px solid var(--ayushman-teal);
+}
+
+[data-theme="dark"] .emergency-grid .card {
+  background: rgba(30, 41, 59, 0.8);
+}
+
+/* Dark Mode Scrollbar */
+[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: rgba(30, 41, 59, 0.5);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: var(--gradient-medical);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: var(--bharat-blue-light);
+}
+
+/* Dark Mode Selection */
+[data-theme="dark"] ::selection {
+  background: var(--india-saffron);
+  color: var(--pure-white);
+}
+
+/* Dark Mode Focus States */
+[data-theme="dark"] *:focus {
+  outline: 2px solid var(--ayushman-teal);
+  outline-offset: 2px;
+}
+
+/* Dark Mode Offline Indicator */
+[data-theme="dark"] #offlineIndicator .card {
+  background: var(--gradient-emergency);
+  color: var(--pure-white);
+}
+
+/* Dark Mode Hero Section */
+[data-theme="dark"] .hero-section {
+  background: transparent;
+}
+
+[data-theme="dark"] #heroSubtagline {
+  color: var(--dark-gray);
+}
+
+/* Dark Mode Language Selector */
+[data-theme="dark"] .form-select {
+  /* background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%233B82F6' d='M6 9L1 4h10z'/%3E%3C/svg%3E"); */
+}
+
+/* Dark Mode Card Icons */
+[data-theme="dark"] .card-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M0 50 L20 30 L40 70 L60 30 L80 70 L100 50" stroke="%23CBD5E1" stroke-width="2" fill="none" stroke-dasharray="1000" stroke-dashoffset="1000"/></svg>');
+}
+
+/* Dark Mode Custom Cursor */
+[data-theme="dark"] .custom-cursor {
+  background: var(--gradient-medical);
+  mix-blend-mode: difference;
+}
+
+/* Dark Mode Loading States */
+[data-theme="dark"] .loading-shimmer {
+  background: linear-gradient(90deg, #1E293B 25%, #334155 50%, #1E293B 75%);
+}
+
+/* Dark Mode Animation Adjustments */
+[data-theme="dark"] .healthchain-glow::after {
+  background: var(--gradient-medical);
+}
+
+/* Dark Mode Emergency Numbers Card */
+[data-theme="dark"] .card[style*="background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%)"] {
+  background: linear-gradient(135deg, #EC4899 0%, #BE185D 100%) !important;
+}
+
+[data-theme="dark"] .card[style*="background: var(--gradient-emergency)"] {
+  background: var(--gradient-emergency) !important;
+}
+
+/* Dark Mode National Emergency Numbers */
+[data-theme="dark"] .card[style*="background: var(--gradient-emergency)"] h2,
+[data-theme="dark"] .card[style*="background: var(--gradient-emergency)"] h3 {
+  color: var(--pure-white) !important;
+  -webkit-text-fill-color: var(--pure-white) !important;
+  background: none !important;
+}
+
+/* Dark Mode Text Color Fixes */
+[data-theme="dark"] .text-emergency {
+  color: var(--lotus-pink) !important;
+}
+
+[data-theme="dark"] .text-primary {
+  color: var(--bharat-blue-light) !important;
+}
+
+[data-theme="dark"] .text-success {
+  color: var(--ayushman-teal) !important;
+}
+
+/* Dark Mode Link Colors */
+[data-theme="dark"] a {
+  color: var(--bharat-blue-light);
+}
+
+[data-theme="dark"] a:hover {
+  color: var(--bharat-blue);
+}
+
+/* Dark Mode Input Placeholder */
+[data-theme="dark"] ::placeholder {
+  color: var(--dark-gray);
+  opacity: 0.7;
+}
+
+/* Dark Mode Medical Record Styles */
+[data-theme="dark"] .medical-record {
+  border-left: 4px solid var(--ayushman-teal);
+}
+
+[data-theme="dark"] .medical-record::before {
+  background: var(--ayushman-teal);
+}
+
+/* Dark Mode Dashboard Specific Styles */
+[data-theme="dark"] .profile-header {
+  background: var(--gradient-medical);
+}
+
+[data-theme="dark"] .dashboard-grid .card {
+  background: rgba(30, 41, 59, 0.8);
+}
+
+[data-theme="dark"] .dashboard-grid .card:hover {
+  background: rgba(30, 41, 59, 0.9);
+}
+
+/* Dark Mode AI Diagnosis Page */
+[data-theme="dark"] #aiDiagnosisPage .card {
+  background: rgba(30, 41, 59, 0.8);
+}
+
+[data-theme="dark"] #aiDiagnosisPage .card:hover {
+  background: rgba(30, 41, 59, 0.9);
+}
+
+/* Dark Mode Privacy Page */
+[data-theme="dark"] #privacyPage .card {
+  background: rgba(30, 41, 59, 0.8);
+}
+
+[data-theme="dark"] #privacyPage .card[style*="background: var(--off-white)"] {
+  background: rgba(30, 41, 59, 0.6) !important;
+}
+
+/* Dark Mode Doctor Dashboard */
+[data-theme="dark"] #doctorDashboardPage .card {
+  background: rgba(30, 41, 59, 0.8);
+}
+
+[data-theme="dark"] #doctorDashboardPage .card-emergency {
+  background: var(--gradient-emergency);
+}
+
+/* Dark Mode Admin Dashboard */
+[data-theme="dark"] #adminDashboardPage .card-gradient {
+  background: var(--gradient-medical);
+}
+
+[data-theme="dark"] #adminDashboardPage .card[style*="background: var(--primary-green)"] {
+  background: var(--ayushman-teal-dark) !important;
+}
+
+[data-theme="dark"] #adminDashboardPage .card[style*="background: var(--severity-critical)"] {
+  background: var(--lotus-pink) !important;
+}
+
+[data-theme="dark"] #adminDashboardPage .card[style*="background: var(--accent-teal)"] {
+  background: var(--ayushman-teal) !important;
+}
+
+/* Dark Mode Final Polish */
+[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+/* Smooth Theme Transition */
+* {
+  transition: background-color 0.3s var(--ease-smooth), 
+              color 0.3s var(--ease-smooth),
+              border-color 0.3s var(--ease-smooth),
+              box-shadow 0.3s var(--ease-smooth);
+}
+
+/* Dark Mode Print Styles */
+@media print {
+  [data-theme="dark"] {
+    --pure-white: #FFFFFF;
+    --charcoal: #000000;
+    --dark-gray: #333333;
+  }
+  
+  [data-theme="dark"] body {
+    background: white !important;
+    color: black !important;
+  }
+  
+  [data-theme="dark"] .card {
+    background: white !important;
+    color: black !important;
+    border: 1px solid #ccc !important;
+  }
+}
+
+/* Dark Mode High Contrast Support */
+@media (prefers-contrast: high) {
+  [data-theme="dark"] {
+    --pure-white: #000000;
+    --charcoal: #FFFFFF;
+    --dark-gray: #E5E5E5;
+    --glass-bg: rgba(0, 0, 0, 0.9);
+  }
+  
+  [data-theme="dark"] body {
+    background: #000000;
+  }
+  
+  [data-theme="dark"] .card {
+    border: 2px solid var(--charcoal);
+  }
+}
+
+/* Dark Mode Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  [data-theme="dark"] * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* ==========================================
+   END OF DARK MODE CSS
+   ========================================== */
+
+
+
+
+
+
+   /* ==========================================
+   Futuristic 3D Homepage Styles
+   ========================================== */
+
+/* 3D Background Elements */
+.three-d-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.floating-cube {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--bharat-blue), var(--ayushman-teal));
+  opacity: 0.1;
+  border-radius: 12px;
+  animation: floatCube 20s infinite linear;
+  transform-style: preserve-3d;
+}
+
+.cube-1 { top: 10%; left: 5%; animation-delay: 0s; }
+.cube-2 { top: 20%; right: 10%; animation-delay: 5s; }
+.cube-3 { bottom: 30%; left: 15%; animation-delay: 10s; }
+.cube-4 { bottom: 20%; right: 20%; animation-delay: 15s; }
+
+.pulse-ring {
+  position: absolute;
+  border: 2px solid var(--ayushman-teal);
+  border-radius: 50%;
+  opacity: 0.1;
+  animation: pulseRing 4s infinite;
+}
+
+.ring-1 { top: 30%; left: 20%; width: 100px; height: 100px; animation-delay: 0s; }
+.ring-2 { bottom: 40%; right: 25%; width: 150px; height: 150px; animation-delay: 2s; }
+.ring-3 { top: 60%; left: 70%; width: 80px; height: 80px; animation-delay: 1s; }
+
+@keyframes floatCube {
+  0%, 100% { 
+    transform: translateY(0px) rotateX(0deg) rotateY(0deg); 
+  }
+  25% { 
+    transform: translateY(-20px) rotateX(90deg) rotateY(90deg); 
+  }
+  50% { 
+    transform: translateY(-40px) rotateX(180deg) rotateY(180deg); 
+  }
+  75% { 
+    transform: translateY(-20px) rotateX(270deg) rotateY(270deg); 
+  }
+}
+
+@keyframes pulseRing {
+  0% { transform: scale(0.8); opacity: 0.1; }
+  50% { transform: scale(1.2); opacity: 0.05; }
+  100% { transform: scale(0.8); opacity: 0.1; }
+}
+
+/* Hero Section 3D */
+.hero-section-3d {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 4rem 0;
+}
+
+.hero-content {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* 3D Logo Animation */
+.logo-3d-container {
+  margin: 0 auto 3rem;
+  perspective: 1000px;
+}
+
+.logo-3d {
+  width: 120px;
+  height: 120px;
+  position: relative;
+  margin: 0 auto;
+  transform-style: preserve-3d;
+  animation: rotate3d 8s infinite linear;
+}
+
+.cube-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: var(--gradient-medical);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  backface-visibility: hidden;
+  border: 2px solid rgba(255,255,255,0.1);
+}
+
+.cube-face.front { transform: translateZ(60px); }
+.cube-face.back { transform: rotateY(180deg) translateZ(60px); }
+.cube-face.right { transform: rotateY(90deg) translateZ(60px); }
+.cube-face.left { transform: rotateY(-90deg) translateZ(60px); }
+.cube-face.top { transform: rotateX(90deg) translateZ(60px); }
+.cube-face.bottom { transform: rotateX(-90deg) translateZ(60px); }
+
+@keyframes rotate3d {
+  0% { transform: rotateX(0) rotateY(0) rotateZ(0); }
+  100% { transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg); }
+}
+
+/* Hero Text */
+.hero-text-3d {
+  margin-bottom: 3rem;
+}
+
+.hero-title-3d {
+  font-size: 4rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, var(--ashoka-navy) 0%, var(--bharat-blue) 50%, var(--ayushman-teal) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.1;
+}
+
+.gradient-text {
+  background: var(--gradient-saffron);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-subtitle-3d {
+  font-size: 1.5rem;
+  color: var(--dark-gray);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* 3D Health Card */
+.health-card-3d {
+  perspective: 1000px;
+  margin: 3rem auto;
+  max-width: 400px;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.health-card-3d:hover .card-inner {
+  transform: rotateY(10deg) rotateX(5deg) translateZ(20px);
+}
+
+.card-front {
+  position: absolute;
+  width: 100%;
+  height: 110%;
+  backface-visibility: hidden;
+  background: linear-gradient(135deg, var(--bharat-blue), var(--ashoka-navy));
+  border-radius: 20px;
+  padding: 2rem;
+  color: white;
+  box-shadow: 
+    0 20px 40px rgba(10, 58, 141, 0.3),
+    0 0 80px rgba(0, 168, 168, 0.2);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.card-glow {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: var(--gradient-medical);
+  border-radius: 22px;
+  z-index: -1;
+  opacity: 0.5;
+  filter: blur(20px);
+}
+
+.card-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-chip {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.card-logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: auto;
+}
+
+.card-data {
+  margin-bottom: 1rem;
+}
+
+.data-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.cardano-badge {
+  background: var(--gradient-saffron);
+  padding: 0.2rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.status-active {
+  color: var(--ayushman-teal);
+  font-weight: 700;
+}
+
+.nfc-indicator {
+  text-align: center;
+  font-size: 0.9rem;
+  opacity: 0.8;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  padding-top: 0.5rem;
+}
+
+/* 3D Buttons */
+.cta-container-3d {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 3rem 0;
+}
+
+.btn-3d {
+  position: relative;
+  padding: 1.2rem 2.5rem;
+  border: none;
+  border-radius: 15px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  min-width: 220px;
+  justify-content: center;
+}
+
+.btn-3d::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 15px;
+  transform: translateZ(-1px);
+  transition: all 0.3s ease;
+}
+
+.btn-3d:hover {
+  transform: translateY(-5px) translateZ(10px);
+}
+
+.btn-3d:active {
+  transform: translateY(0) translateZ(5px);
+}
+
+.btn-primary-3d {
+  background: var(--gradient-medical);
+  color: white;
+  box-shadow: 
+    0 10px 30px rgba(10, 58, 141, 0.4),
+    0 0 40px rgba(0, 168, 168, 0.3);
+}
+
+.btn-primary-3d::before {
+  background: var(--gradient-medical);
+  filter: blur(10px);
+  opacity: 0.6;
+}
+
+.btn-outline-3d {
+  background: transparent;
+  color: var(--bharat-blue);
+  border: 2px solid var(--bharat-blue);
+  box-shadow: 0 5px 15px rgba(10, 58, 141, 0.2);
+}
+
+.btn-outline-3d::before {
+  background: var(--bharat-blue);
+  filter: blur(8px);
+  opacity: 0.3;
+}
+
+.btn-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 15px;
+  background: inherit;
+  filter: blur(15px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn-3d:hover .btn-glow {
+  opacity: 0.6;
+}
+
+.btn-icon {
+  font-size: 1.3rem;
+}
+
+/* 3D Features Grid */
+.features-grid-3d {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin: 4rem 0;
+}
+
+.feature-card-3d {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+  transform-style: preserve-3d;
+}
+
+.feature-card-3d::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  transition: left 0.6s;
+}
+
+.feature-card-3d:hover::before {
+  left: 100%;
+}
+
+.feature-card-3d:hover {
+  transform: translateY(-10px) rotateX(5deg) rotateY(5deg) scale(1.05);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.1),
+    0 0 60px rgba(10, 58, 141, 0.1);
+}
+
+.feature-icon-3d {
+  margin-bottom: 1.5rem;
+  position: relative;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-3d {
+  width: 60px;
+  height: 60px;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: floatIcon 3s ease-in-out infinite;
+}
+
+.icon-cube {
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  backface-visibility: hidden;
+}
+
+.blockchain-icon .icon-cube { 
+  background: var(--gradient-medical); 
+  content: '🔗';
+}
+.ai-icon .icon-cube { 
+  background: var(--gradient-teal); 
+  content: '🤖';
+}
+.privacy-icon .icon-cube { 
+  background: var(--gradient-saffron); 
+  content: '🔒';
+}
+.emergency-icon .icon-cube { 
+  background: var(--gradient-emergency); 
+  content: '🚨';
+}
+
+.icon-glow {
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border-radius: 20px;
+  filter: blur(10px);
+  opacity: 0.6;
+}
+
+.blockchain-icon .icon-glow { background: var(--bharat-blue); }
+.ai-icon .icon-glow { background: var(--ayushman-teal); }
+.privacy-icon .icon-glow { background: var(--india-saffron); }
+.emergency-icon .icon-glow { background: var(--lotus-pink); }
+
+@keyframes floatIcon {
+  0%, 100% { transform: translateY(0px) rotateY(0deg); }
+  50% { transform: translateY(-10px) rotateY(180deg); }
+}
+
+.feature-title-3d {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--ashoka-navy);
+}
+
+.feature-desc-3d {
+  color: var(--dark-gray);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.feature-badge {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: rgba(10, 58, 141, 0.1);
+  border: 1px solid rgba(10, 58, 141, 0.2);
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--bharat-blue);
+}
+
+/* Mission Footer */
+.mission-footer-3d {
+  text-align: center;
+  margin-top: 4rem;
+  padding: 3rem 0;
+  position: relative;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.mission-glow {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 2px;
+  background: var(--gradient-saffron);
+  filter: blur(10px);
+}
+
+.mission-text-3d {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  color: var(--ashoka-navy);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.blockchain-badge-3d {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1rem 2rem;
+  background: rgba(10, 58, 141, 0.1);
+  border: 1px solid rgba(10, 58, 141, 0.2);
+  border-radius: 50px;
+  font-weight: 700;
+  color: var(--bharat-blue);
+  position: relative;
+  overflow: hidden;
+}
+
+.chain-link {
+  font-size: 1.2rem;
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--ayushman-teal);
+  border-radius: 50%;
+  animation: pulseDot 2s infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.5); }
+}
+
+/* Dark Mode Support */
+[data-theme="dark"] .hero-title-3d {
+  background: linear-gradient(135deg, var(--charcoal) 0%, var(--bharat-blue-light) 50%, var(--ayushman-teal) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+[data-theme="dark"] .feature-card-3d {
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .feature-title-3d {
+  color: var(--charcoal);
+}
+
+[data-theme="dark"] .mission-text-3d {
+  color: var(--charcoal);
+}
+
+[data-theme="dark"] .blockchain-badge-3d {
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  color: var(--bharat-blue-light);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-title-3d {
+    font-size: 2.5rem;
+  }
+  
+  .hero-subtitle-3d {
+    font-size: 1.2rem;
+  }
+  
+  .cta-container-3d {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .btn-3d {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .features-grid-3d {
+    grid-template-columns: 1fr;
+  }
+  
+  .health-card-3d {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title-3d {
+    font-size: 2rem;
+  }
+  
+  .logo-3d {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .cube-face {
+    font-size: 1.8rem;
+  }
+  
+  .cube-face.front { transform: translateZ(40px); }
+  .cube-face.back { transform: rotateY(180deg) translateZ(40px); }
+  .cube-face.right { transform: rotateY(90deg) translateZ(40px); }
+  .cube-face.left { transform: rotateY(-90deg) translateZ(40px); }
+  .cube-face.top { transform: rotateX(90deg) translateZ(40px); }
+  .cube-face.bottom { transform: rotateX(-90deg) translateZ(40px); }
+}
+

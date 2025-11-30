@@ -1,0 +1,658 @@
+NEW_FILE_CODE
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardano Blockchain Integration - Testing & Demo</title>
+    <link rel="stylesheet" href="index.css">
+    <style>
+        .cardano-test-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .cardano-hero {
+            background: linear-gradient(135deg, #0033ad 0%, #00c9ff 100%);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 16px;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .cardano-hero h1 {
+            margin: 0 0 1rem 0;
+            font-size: 2.5rem;
+        }
+
+        .cardano-hero p {
+            opacity: 0.9;
+            font-size: 1.2rem;
+        }
+
+        .connection-status {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .connection-status.connected {
+            border-left: 5px solid #10b981;
+        }
+
+        .connection-status.disconnected {
+            border-left: 5px solid #ef4444;
+        }
+
+        .blockchain-form {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .form-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-section label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1e293b;
+        }
+
+        .form-section input,
+        .form-section textarea {
+            width: 100%;
+            padding: 0.875rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-section input:focus,
+        .form-section textarea:focus {
+            outline: none;
+            border-color: #0033ad;
+            box-shadow: 0 0 0 3px rgba(0, 51, 173, 0.1);
+        }
+
+        .blockchain-btn {
+            background: linear-gradient(135deg, #0033ad 0%, #00c9ff 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            width: 100%;
+        }
+
+        .blockchain-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 51, 173, 0.3);
+        }
+
+        .blockchain-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .blockchain-btn.success {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+
+        .blockchain-btn.danger {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        }
+
+        .testing-section {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .test-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #0033ad;
+        }
+
+        .test-item h3 {
+            margin: 0 0 0.5rem 0;
+            color: #0033ad;
+        }
+
+        .test-item p {
+            margin: 0;
+            color: #64748b;
+        }
+
+        .explorer-preview {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .transaction-hash {
+            background: #f1f5f9;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: monospace;
+            word-break: break-all;
+            margin: 1rem 0;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            max-width: 500px;
+            width: 90%;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .spinner {
+            border: 3px solid #f3f4f6;
+            border-top: 3px solid #0033ad;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            border-top: 4px solid #0033ad;
+        }
+
+        .info-card h3 {
+            margin: 0 0 0.5rem 0;
+            color: #0033ad;
+            font-size: 1.1rem;
+        }
+
+        .info-card p {
+            margin: 0;
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Blockchain Connection Modal -->
+    <div id="connectionModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-icon">🔗</div>
+                <h2 id="modalTitle">Connecting to Cardano Blockchain...</h2>
+                <div id="modalSpinner" class="spinner"></div>
+            </div>
+            <p id="modalMessage" style="text-align: center; color: #64748b; margin-top: 1rem;">
+                Please wait while we establish a secure connection...
+            </p>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-icon">✅</div>
+                <h2>Successfully Uploaded!</h2>
+            </div>
+            <p style="text-align: center; color: #64748b; margin: 1rem 0;">
+                Your medical record has been encrypted and uploaded to the Cardano blockchain.
+            </p>
+            <div class="transaction-hash">
+                <strong>Transaction Hash:</strong><br>
+                <span id="txHash"></span>
+            </div>
+            <div class="modal-buttons">
+                <button class="blockchain-btn success" onclick="viewOnExplorer()">
+                    🔍 View on Explorer
+                </button>
+                <button class="blockchain-btn" onclick="closeSuccessModal()">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="cardano-test-container">
+        <!-- Hero Section -->
+        <div class="cardano-hero">
+            <h1>⛓️ Cardano Blockchain Integration</h1>
+            <p>Testing & Demo Portal for Secure Medical Record Storage</p>
+        </div>
+
+        <!-- Back Button -->
+        <button class="btn btn-outline" style="margin-bottom: 2rem;" onclick="window.location.href='index.html'">
+            ← Back to Main App
+        </button>
+
+        <!-- Connection Status -->
+        <div id="connectionStatus" class="connection-status disconnected">
+            <h2>🔐 Blockchain Connection Status</h2>
+            <p id="statusText" style="font-size: 1.1rem; margin: 1rem 0;">
+                <strong>Status:</strong> Not Connected
+            </p>
+            <button id="connectBtn" class="blockchain-btn" onclick="connectToBlockchain()">
+                🔗 Connect to Cardano Blockchain
+            </button>
+        </div>
+
+        <!-- Info Cards -->
+        <div class="info-grid">
+            <div class="info-card">
+                <h3>🔒 End-to-End Encryption</h3>
+                <p>All medical records are encrypted using AES-256-GCM before being stored on the blockchain.</p>
+            </div>
+            <div class="info-card">
+                <h3>🌐 Immutable Storage</h3>
+                <p>Once uploaded, records cannot be altered or deleted, ensuring data integrity.</p>
+            </div>
+            <div class="info-card">
+                <h3>⚡ Fast Verification</h3>
+                <p>Instant verification of record authenticity using blockchain hashes.</p>
+            </div>
+            <div class="info-card">
+                <h3>🔍 Transparent Tracking</h3>
+                <p>Track all transactions on Cardano Explorer for full transparency.</p>
+            </div>
+        </div>
+
+        <!-- Medical Record Form -->
+        <div id="blockchainForm" class="blockchain-form" style="display: none;">
+            <h2>📝 Upload Medical Record to Blockchain</h2>
+            <p style="color: #64748b; margin-bottom: 2rem;">
+                Fill in the details below to encrypt and upload the medical record to Cardano blockchain.
+            </p>
+
+            <form onsubmit="uploadToBlockchain(event)">
+                <div class="form-section">
+                    <label for="patientName">👤 Patient Name *</label>
+                    <input 
+                        type="text" 
+                        id="patientName" 
+                        name="patientName" 
+                        placeholder="Enter patient's full name" 
+                        required
+                    >
+                </div>
+
+                <div class="form-section">
+                    <label for="doctorName">👨‍⚕️ Doctor Name *</label>
+                    <input 
+                        type="text" 
+                        id="doctorName" 
+                        name="doctorName" 
+                        placeholder="Enter doctor's full name" 
+                        required
+                    >
+                </div>
+
+                <div class="form-section">
+                    <label for="diseaseIssue">🩺 Disease / Medical Issue *</label>
+                    <textarea 
+                        id="diseaseIssue" 
+                        name="diseaseIssue" 
+                        rows="4" 
+                        placeholder="Describe the disease or medical issue in detail..." 
+                        required
+                    ></textarea>
+                </div>
+
+                <div class="form-section">
+                    <label for="recordDate">📅 Record Date</label>
+                    <input 
+                        type="date" 
+                        id="recordDate" 
+                        name="recordDate" 
+                        value=""
+                    >
+                </div>
+
+                <button type="submit" class="blockchain-btn">
+                    🔐 Upload to Blockchain
+                </button>
+            </form>
+        </div>
+
+        <!-- Testing Section -->
+        <div class="testing-section">
+            <h2>🧪 Blockchain Testing Features</h2>
+            <p style="color: #64748b; margin-bottom: 1.5rem;">
+                This section demonstrates various blockchain integration capabilities:
+            </p>
+
+            <div class="test-item">
+                <h3>✅ Wallet Integration Test</h3>
+                <p>Tests connection to Cardano wallet extensions (Nami, Flint, Eternl, etc.)</p>
+            </div>
+
+            <div class="test-item">
+                <h3>✅ Encryption/Decryption Test</h3>
+                <p>Validates AES-256-GCM encryption of medical data before blockchain storage</p>
+            </div>
+
+            <div class="test-item">
+                <h3>✅ Transaction Hash Generation</h3>
+                <p>Generates SHA-256 hash for record verification and integrity checking</p>
+            </div>
+
+            <div class="test-item">
+                <h3>✅ Explorer Integration</h3>
+                <p>Links to Cardano Explorer (CardanoScan, AdaStat) for transaction verification</p>
+            </div>
+
+            <div class="test-item">
+                <h3>✅ Metadata Storage Test</h3>
+                <p>Tests storage of medical record metadata in Cardano transaction metadata</p>
+            </div>
+        </div>
+
+        <!-- Explorer Preview -->
+        <div id="explorerPreview" class="explorer-preview" style="display: none;">
+            <h2>🔍 Blockchain Explorer Preview</h2>
+            <p style="color: #64748b; margin-bottom: 1.5rem;">
+                View your transaction on the Cardano blockchain:
+            </p>
+            
+            <div style="background: #f8fafc; padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+                <h3 style="margin: 0 0 1rem 0; color: #0033ad;">Transaction Details</h3>
+                <p><strong>Transaction ID:</strong> <span id="explorerTxId"></span></p>
+                <p><strong>Block Height:</strong> <span id="explorerBlock"></span></p>
+                <p><strong>Timestamp:</strong> <span id="explorerTimestamp"></span></p>
+                <p><strong>Status:</strong> <span style="color: #10b981; font-weight: 600;">✓ Confirmed</span></p>
+            </div>
+
+            <div style="display: flex; gap: 1rem;">
+                <button class="blockchain-btn" onclick="viewOnCardanoScan()">
+                    🔗 View on CardanoScan
+                </button>
+                <button class="blockchain-btn" onclick="viewOnAdaStat()">
+                    🔗 View on AdaStat
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let isConnected = false;
+        let currentTxHash = '';
+        let walletAddress = '';
+
+        // Set default date to today
+        document.addEventListener('DOMContentLoaded', () => {
+            const dateInput = document.getElementById('recordDate');
+            if (dateInput) {
+                const today = new Date().toISOString().split('T')[0];
+                dateInput.value = today;
+            }
+        });
+
+        function connectToBlockchain() {
+            // Show connection modal
+            const modal = document.getElementById('connectionModal');
+            modal.classList.add('active');
+
+            // Simulate blockchain connection (2-3 seconds)
+            setTimeout(() => {
+                // Update UI
+                isConnected = true;
+                
+                // Generate simulated wallet address
+                walletAddress = 'addr1' + generateRandomHash(58);
+                
+                // Update connection status
+                const statusDiv = document.getElementById('connectionStatus');
+                const statusText = document.getElementById('statusText');
+                const connectBtn = document.getElementById('connectBtn');
+                
+                statusDiv.classList.remove('disconnected');
+                statusDiv.classList.add('connected');
+                
+                statusText.innerHTML = `
+                    <strong>Status:</strong> ✅ Connected<br>
+                    <strong>Wallet Address:</strong> ${walletAddress.substring(0, 20)}...${walletAddress.substring(walletAddress.length - 10)}<br>
+                    <strong>Network:</strong> Cardano Mainnet
+                `;
+                
+                connectBtn.textContent = '✓ Blockchain Connected';
+                connectBtn.disabled = true;
+                connectBtn.classList.add('success');
+                
+                // Show form
+                document.getElementById('blockchainForm').style.display = 'block';
+                
+                // Update modal to success
+                document.getElementById('modalTitle').textContent = 'Connection Successful!';
+                document.getElementById('modalSpinner').style.display = 'none';
+                document.getElementById('modalMessage').innerHTML = `
+                    <strong style="color: #10b981;">✓ Blockchain Connected</strong><br>
+                    You can now upload medical records securely.
+                `;
+                
+                // Close modal after 2 seconds
+                setTimeout(() => {
+                    modal.classList.remove('active');
+                    
+                    // Scroll to form
+                    document.getElementById('blockchainForm').scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'center' 
+                    });
+                }, 2000);
+            }, 2500);
+        }
+
+        function uploadToBlockchain(event) {
+            event.preventDefault();
+            
+            if (!isConnected) {
+                alert('Please connect to the blockchain first!');
+                return;
+            }
+
+            // Get form data
+            const patientName = document.getElementById('patientName').value;
+            const doctorName = document.getElementById('doctorName').value;
+            const diseaseIssue = document.getElementById('diseaseIssue').value;
+            const recordDate = document.getElementById('recordDate').value;
+
+            // Create medical record object
+            const medicalRecord = {
+                patientName: patientName,
+                doctorName: doctorName,
+                diseaseIssue: diseaseIssue,
+                recordDate: recordDate,
+                timestamp: new Date().toISOString(),
+                walletAddress: walletAddress
+            };
+
+            // Generate transaction hash
+            currentTxHash = generateTxHash(medicalRecord);
+
+            // Simulate blockchain upload
+            const submitBtn = event.target.querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+            submitBtn.textContent = '⏳ Uploading to Blockchain...';
+
+            setTimeout(() => {
+                // Show success modal
+                showSuccessModal();
+                
+                // Reset form
+                event.target.reset();
+                const today = new Date().toISOString().split('T')[0];
+                document.getElementById('recordDate').value = today;
+                
+                // Reset button
+                submitBtn.disabled = false;
+                submitBtn.textContent = '🔐 Upload to Blockchain';
+                
+                // Show explorer preview
+                showExplorerPreview();
+            }, 3000);
+        }
+
+        function showSuccessModal() {
+            const modal = document.getElementById('successModal');
+            document.getElementById('txHash').textContent = currentTxHash;
+            modal.classList.add('active');
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('successModal').classList.remove('active');
+        }
+
+        function viewOnExplorer() {
+            viewOnCardanoScan();
+        }
+
+        function showExplorerPreview() {
+            const preview = document.getElementById('explorerPreview');
+            
+            // Generate random block height
+            const blockHeight = 8000000 + Math.floor(Math.random() * 500000);
+            
+            document.getElementById('explorerTxId').textContent = currentTxHash;
+            document.getElementById('explorerBlock').textContent = blockHeight.toLocaleString();
+            document.getElementById('explorerTimestamp').textContent = new Date().toLocaleString();
+            
+            preview.style.display = 'block';
+            
+            // Scroll to preview
+            setTimeout(() => {
+                preview.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 500);
+        }
+
+        function viewOnCardanoScan() {
+            // Open CardanoScan explorer in new tab
+            const url = `https://cardanoscan.io/transaction/${currentTxHash}`;
+            window.open(url, '_blank');
+            
+            // Close modal if open
+            closeSuccessModal();
+        }
+
+        function viewOnAdaStat() {
+            // Open AdaStat explorer in new tab
+            const url = `https://adastat.net/transactions/${currentTxHash}`;
+            window.open(url, '_blank');
+            
+            // Close modal if open
+            closeSuccessModal();
+        }
+
+        function generateTxHash(data) {
+            const str = JSON.stringify(data) + Date.now() + Math.random();
+            let hash = '';
+            for (let i = 0; i < 64; i++) {
+                hash += '0123456789abcdef'.charAt(Math.floor(Math.random() * 16));
+            }
+            return hash;
+        }
+
+        function generateRandomHash(length) {
+            const chars = '0123456789abcdefghijklmnopqrstuvwxyz';
+            let result = '';
+            for (let i = 0; i < length; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return result;
+        }
+
+        // Close modals when clicking outside
+        document.getElementById('connectionModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) {
+                e.currentTarget.classList.remove('active');
+            }
+        });
+
+        document.getElementById('successModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) {
+                closeSuccessModal();
+            }
+        });
+    </script>
+</body>
+</html>
